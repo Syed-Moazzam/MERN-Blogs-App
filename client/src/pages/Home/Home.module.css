@@ -1,0 +1,27 @@
+.blogsCategoryContainer {
+    margin: 20px auto;
+}
+
+.categoriesMainContainer {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+    margin-top: 22px;
+}
+
+.eachCategoryContainer {
+    border-bottom: 1px solid #ccc;
+    line-height: 1.43;
+    text-align: left;
+    padding: 15px;
+}
+
+.eachCategoryContainer a {
+    font-size: 15.5px;
+    color: #504e4e;
+}
+
+.eachCategoryContainer a:hover {
+    color: var(--black-color);
+}

@@ -1,0 +1,16 @@
+.inputComponentContainer {
+    width: 100%;
+    margin: 12px 0px;
+}
+
+.inputComponent {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757171;
+    padding: 8px 0px;
+}
+
+.inputComponent:hover {
+    border-bottom: 2px solid var(--black-color);
+}

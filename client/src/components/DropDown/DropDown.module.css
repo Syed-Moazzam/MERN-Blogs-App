@@ -1,0 +1,20 @@
+.dropdownContainer {
+    width: 100%;
+    margin: 12px 0px;
+}
+
+.dropdownComponent {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757171;
+    padding: 8px 0px;
+    font-family: 'roboto-regular';
+    font-size: 17px;
+    color: var(--black-color);
+    cursor: pointer;
+}
+
+.dropdownComponent:hover {
+    border-bottom: 2px solid var(--black-color);
+}

@@ -1,0 +1,10 @@
+.footerContainer {
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 0px 6px #000;
+    padding: 12px 0px;
+    font-size: 18.5px;
+    position: static;
+    bottom: 0px;
+    font-weight: bold;
+}

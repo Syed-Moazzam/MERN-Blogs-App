@@ -1,0 +1,25 @@
+.contactImg2 {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    display: flex;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.contactFormSection {
+    margin: 60px auto 30px;
+}
+
+.contactForm h2 {
+    letter-spacing: 1px;
+}
+
+.contactFormBtn {
+    width: 120px !important;
+    margin-top: 18px;
+}
+
+.contactFormBtn:hover {
+    background-color: var(--secondary-hover-color);
+}

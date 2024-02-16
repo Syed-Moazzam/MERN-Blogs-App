@@ -1,0 +1,15 @@
+.createBlogContainer {
+    margin: 60px auto 50px;
+}
+
+.publishBtnOfCreateBlogPage {
+    width: 12%;
+}
+
+.uploadImageDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
