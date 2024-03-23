@@ -4,6 +4,8 @@ const { readdirSync } = require('fs');
 const cors = require('cors');
 const cloudinary = require('cloudinary').v2;
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
 dotenv.config();
 
 const port = process.env.PORT || 5000;
@@ -11,6 +13,7 @@ const app = express();
 
 // middleware
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 // connecting to the MongoDB Database
