@@ -34,8 +34,8 @@ exports.login = async (req, res) => {
                     _id: user?._id,
                     username: user?.username,
                     email: user?.email
-                }, process.env.JWT_SECRET_KEY, { expiresIn: '20m' })
-                res.send({ status: 'success', data: token });
+                }, process.env.JWT_SECRET_KEY)
+                res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 3600000 }).send({ status: 'success', message: 'Logged In Successfully!' });
             }
             else {
                 res.send({ status: 'error', message: 'Incorrect Password.' });
