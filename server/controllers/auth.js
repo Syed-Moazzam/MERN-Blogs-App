@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body?.email });
         if (user) {
-            res.send({ status: 'error', message: "user already exists." });
+            res.send({ status: 'error', message: "User Already Exists!" });
         }
         else {
             const encryptedPass = await bcrypt.hash(req.body?.password, 10);
@@ -20,7 +20,7 @@ exports.signup = async (req, res) => {
             res.send({ status: 'success', data: userWithoutPwd });
         }
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -34,17 +34,26 @@ exports.login = async (req, res) => {
                     _id: user?._id,
                     username: user?.username,
                     email: user?.email
-                }, process.env.JWT_SECRET_KEY)
-                res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 3600000 }).send({ status: 'success', message: 'Logged In Successfully!' });
+                }, process.env.JWT_SECRET_KEY);
+
+                res.cookie('token', token, { httpOnly: false, secure: false, maxAge: 1800000 }).send({ status: 'success', message: 'Logged In Successfully!' });
             }
             else {
-                res.send({ status: 'error', message: 'Incorrect Password.' });
+                res.send({ status: 'error', message: 'Incorrect Password!' });
             }
         }
         else {
-            res.send({ status: 'error', message: 'Incorrect Email.' });
+            res.send({ status: 'error', message: 'Incorrect Email!' });
         }
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
+    }
+}
+
+exports.logout = async (req, res) => {
+    try {
+        res.clearCookie('token').send({ status: 'success', message: 'Logged Out Successfully!' });
+    } catch (error) {
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }

@@ -1,47 +1,57 @@
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const Blog = require('../models/Blog');
+const bcrypt = require('bcryptjs');
 
 exports.getUser = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const user = await User.findById({ _id: decodedToken?._id });
-        res.send({ status: 'success', data: user });
+        const decodedUser = req.user;
+        if (req.body.userId === decodedUser?._id) {
+            const user = await User.findById({ _id: decodedUser?._id });
+            res.send({ status: 'success', data: user });
+        }
+        else {
+            res.send({ status: 'error', message: "You Can Only Access Your Own Information!" });
+        }
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
 exports.updateUser = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const decodedUser = req.user;
+        if (req.body.userId === decodedUser?._id) {
+            if (req.body.password) {
+                const encryptedPass = await bcrypt.hash(req.body.password, 10);
+                req.body.password = encryptedPass;
+            }
 
-        if (req.body.password) {
-            const encryptedPass = await bcrypt.hash(req.body.password, 10);
-            req.body.password = encryptedPass;
+            const updatedUser = await User.findByIdAndUpdate({ _id: decodedUser?._id }, { $set: req.body }, { new: true });
+            const { password, ...userWithoutPwd } = updatedUser?._doc;
+            res.send({ status: 'success', data: userWithoutPwd });
         }
-
-        const updatedUser = await User.findByIdAndUpdate({ _id: decodedToken?._id }, { $set: req.body }, { new: true });
-        const { password, ...userWithoutPwd } = updatedUser?._doc;
-        res.send({ status: 'success', data: userWithoutPwd });
+        else {
+            res.send({ status: 'error', message: "You Can Only Update Your Own Information!" });
+        }
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
 exports.deleteUser = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const isDeleted = await Blog.deleteMany({ authorEmail: decodedToken?.email });
-        if (isDeleted) {
-            await User.findByIdAndDelete({ _id: decodedToken?._id });
-            res.send({ status: 'success', message: 'User deleted successfully!' });
+        const decodedUser = req.user;
+        if (req.body.userId === decodedUser?._id) {
+            const isDeleted = await Blog.deleteMany({ authorEmail: decodedUser?.email });
+            if (isDeleted) {
+                await User.findByIdAndDelete({ _id: decodedUser?._id });
+                res.send({ status: 'success', message: 'User deleted successfully!' });
+            }
+        }
+        else {
+            res.send({ status: 'error', message: "You Can Only Delete Your Own Account!" });
         }
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }

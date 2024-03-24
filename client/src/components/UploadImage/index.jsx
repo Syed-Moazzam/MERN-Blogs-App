@@ -18,10 +18,10 @@ const UploadImage = ({ value, setter }) => {
     return (
         <div className={styles.uploadImageContainer}>
             <input type="file" accept='image/*' ref={imgRef} onChange={handleImageUpload} />
-            <div className={value === null ? styles.defaultImgOverlay : styles.uploadImgOverlay} onClick={handleImageSelection}>
+            <button className={value === null ? styles.defaultImgOverlay : styles.uploadImgOverlay} onClick={handleImageSelection}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>
-            </div>
+            </button>
             <img src={value} alt="" />
         </div>
     )

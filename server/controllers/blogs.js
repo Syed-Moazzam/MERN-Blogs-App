@@ -2,9 +2,10 @@ const Blog = require('../models/Blog');
 
 exports.createBlog = async (req, res) => {
     try {
+        const decodedUser = req.user;
         const newBlog = await Blog.create({
-            authorName: req.body?.authorName,
-            authorEmail: req.body?.authorEmail,
+            authorId: decodedUser?._id,
+            authorEmail: decodedUser?.email,
             title: req.body?.title,
             category: req.body?.category,
             story: req.body?.story,
@@ -13,7 +14,7 @@ exports.createBlog = async (req, res) => {
         res.send({ status: 'success', data: newBlog });
     }
     catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -29,7 +30,7 @@ exports.getAllBlogs = async (req, res) => {
         }
         res.send({ status: 'success', data: blogs });
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -39,28 +40,40 @@ exports.getSingleBlog = async (req, res) => {
         const blog = await Blog.findOne({ _id: blogId });
         res.send({ status: 'success', data: blog });
     } catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
 exports.updateBlog = async (req, res) => {
     try {
-        const { blogId } = req.params;
-        const updatedBlog = await Blog.findByIdAndUpdate({ _id: blogId }, { $set: req.body }, { new: true });
-        res.send({ status: 'success', data: updatedBlog });
+        const decodedUser = req.user;
+        if (req.body.userId === decodedUser?._id) {
+            const { blogId } = req.params;
+            const updatedBlog = await Blog.findByIdAndUpdate({ _id: blogId }, { $set: req.body }, { new: true });
+            res.send({ status: 'success', data: updatedBlog });
+        }
+        else {
+            res.send({ status: 'error', message: "You Can Only Update Your Own Blogs!" });
+        }
     }
     catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
 exports.deleteBlog = async (req, res) => {
     try {
-        const { blogId } = req.params;
-        const deletedBlog = await Blog.findByIdAndDelete({ _id: blogId }, { new: true });
-        res.send({ status: 'success', data: deletedBlog });
+        const decodedUser = req.user;
+        if (req.body.userId === decodedUser?._id) {
+            const { blogId } = req.params;
+            const deletedBlog = await Blog.findByIdAndDelete({ _id: blogId }, { new: true });
+            res.send({ status: 'success', data: deletedBlog });
+        }
+        else {
+            res.send({ status: 'error', message: 'You Can Only Delete Your Own Blogs!' });
+        }
     }
     catch (error) {
-        console.log(error.message);
+        res.status(505).send({ status: 'error', message: error.message });
     }
 }
