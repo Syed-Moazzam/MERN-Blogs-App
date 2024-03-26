@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import allImages from '../../constant/imagePath';
+import allImages from '../../constants/imagePath';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';

@@ -1,55 +1,60 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import getBaseUrl from './checkEnvironment';
 
 const baseUrl = getBaseUrl();
 
 // auth api's
-export const signupApi = async (data) => {
-    return axios.post(`${baseUrl}/signup`, data);
+export const signupApi = async (reqBody) => {
+    return axios.post(`${baseUrl}/signup`, reqBody);
 };
 
-export const loginApi = (data) => {
-    return axios.post(`${baseUrl}/login`, data);
+export const loginApi = (reqBody) => {
+    return axios.post(`${baseUrl}/login`, reqBody);
 };
 
-export const logoutApi = () => {
+export const logoutApi = async () => {
     return axios.post(`${baseUrl}/logout`);
 }
 
 // user api's
-export const getUser = () => {
+export const getUser = async () => {
     return axios.get(`${baseUrl}/get-user`);
 }
 
-export const updateUser = (data) => {
-    return axios.put(`${baseUrl}/update-user`, data);
+export const updateUser = async (reqBody) => {
+    return axios.put(`${baseUrl}/update-user`, reqBody);
 }
 
-export const deleteUser = () => {
+export const deleteUser = async () => {
     return axios.delete(`${baseUrl}/delete-user`);
 }
 
 // blog api's
-export const getAllBlogs = () => {
+export const getAllBlogs = async () => {
     return axios.get(`${baseUrl}/get-all-blogs`);
 }
 
-export const getSingleBlog = (blogId) => {
+export const getSingleBlog = async (blogId) => {
     return axios.get(`${baseUrl}/get-single-blog/${blogId}`);
 }
 
-export const createBlog = (data) => {
-    return axios.get(`${baseUrl}/create-blog`, data);
+export const createBlog = async (reqBody) => {
+    return axios.get(`${baseUrl}/create-blog`, reqBody);
 }
 
-export const updateBlog = (blogId, data) => {
-    return axios.get(`${baseUrl}/update-blog/${blogId}`, data);
+export const updateBlog = async (blogId, reqBody) => {
+    return axios.get(`${baseUrl}/update-blog/${blogId}`, reqBody);
 }
 
-export const deleteBlog = (blogId) => {
+export const deleteBlog = async (blogId) => {
     return axios.get(`${baseUrl}/delete-blog/${blogId}`);
+}
+
+// api for uploading images to cloudinary
+export const uploadImagesToCloudinary = async (formData) => {
+    return axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, formData);
 }
 
 // for checking token validity

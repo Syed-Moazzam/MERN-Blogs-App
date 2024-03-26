@@ -9,82 +9,94 @@
 }
 
 @font-face {
-    font-family: 'roboto-bold';
-    src: url('../fonts/Roboto/Roboto-Bold.ttf');
+    font-family: 'poppins-bold';
+    src: url('../fonts/Poppins/Poppins-Bold.ttf');
+}
+
+
+@font-face {
+    font-family: 'poppins-regular';
+    src: url('../fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
-    font-family: 'roboto-medium';
-    src: url('../fonts/Roboto/Roboto-Medium.ttf');
+    font-family: 'poppins-medium';
+    src: url('../fonts/Poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
-    font-family: 'roboto-regular';
-    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+    font-family: 'poppins-semiBold';
+    src: url('../fonts/Poppins/Poppins-SemiBold.ttf');
 }
 
 body h1 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 45px;
     color: var(--black-color);
 }
 
 body h2 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 40px;
     color: var(--black-color);
 }
 
 body h3 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 35px;
     color: var(--black-color);
 }
 
 body h4 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 25px;
     color: var(--black-color);
 }
 
 body h5 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 22px;
     color: var(--black-color);
 }
 
 body h6 {
-    font-family: 'roboto-bold';
+    font-family: 'poppins-bold';
     font-size: 18px;
     color: var(--black-color);
 }
 
 body input {
-    font-family: 'roboto-regular';
+    font-family: 'poppins-regular';
     font-size: 17px;
     color: var(--black-color);
 }
 
 body textarea {
-    font-family: 'roboto-regular';
+    font-family: 'poppins-regular';
     font-size: 17px;
     color: var(--black-color);
 }
 
 body button {
-    font-family: 'roboto-regular';
+    font-family: 'poppins-regular';
     font-size: 16px;
     color: var(--white-color);
 }
 
 body a {
-    font-family: 'roboto-regular';
+    font-family: 'poppins-medium';
     font-size: 16px;
     color: var(--black-color);
 }
 
 body p {
-    font-family: 'roboto-regular';
+    font-family: 'poppins-regular';
     font-size: 16px;
+    color: var(--black-color);
+}
+
+body footer {
+    font-family: 'poppins-semiBold';
+    font-size: 22px;
     color: var(--black-color);
 }

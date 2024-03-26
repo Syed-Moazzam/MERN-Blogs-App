@@ -9,8 +9,8 @@
     border: none;
     border-bottom: 1px solid #757171;
     padding: 8px 0px;
-    font-family: 'roboto-regular';
-    font-size: 17px;
+    font-family: 'poppins-regular';
+    font-size: 16.5px;
     color: var(--black-color);
     cursor: pointer;
 }

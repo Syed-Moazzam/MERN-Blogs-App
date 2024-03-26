@@ -28,7 +28,6 @@ const blogSchema = new Schema({
     },
     blogImg: {
         type: String,
-        // required: true,
         default: ""
     }
 }, { timestamps: true });

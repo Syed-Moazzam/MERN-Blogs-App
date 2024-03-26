@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import allImages from '../../constant/imagePath';
+import allImages from '../../constants/imagePath';
 import styles from './Home.module.css';
 import Button from '../../components/Button';
 import HeroSection from '../../components/HeroSection';
 import { Link, useNavigate } from 'react-router-dom';
+import BlogCard from '../../components/BlogCard';
+import { getAllBlogs } from '../../api';
 
 const Home = () => {
     const navigate = useNavigate();
+    const [blogs, setBlogs] = useState([]);
 
     const categories = [
         { label: 'All Categories', path: '/' },
@@ -19,6 +22,14 @@ const Home = () => {
         { label: 'Technology', path: '?category=Technology' },
         { label: 'Fashion', path: '?category=Fashion' }
     ];
+
+    useEffect(() => {
+        getAllBlogs().then((res) => {
+            setBlogs(res?.data?.data);
+        }).catch((err) => {
+            console.log('err', err);
+        })
+    }, []);
 
     return (
         <>
@@ -37,6 +48,16 @@ const Home = () => {
                                 )
                             })}
                         </div>
+                    </Col>
+
+                    <Col lg={10}>
+                        <Row>
+                            {blogs?.map((blog, index) => {
+                                return <Col lg={3} key={index}>
+                                    <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorEmail={blog?.authorEmail} blogDescription={blog?.story} />
+                                </Col>
+                            })}
+                        </Row>
                     </Col>
                 </Row>
             </Container>

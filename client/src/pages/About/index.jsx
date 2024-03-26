@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroSection from '../../components/HeroSection';
-import allImages from '../../constant/imagePath';
+import allImages from '../../constants/imagePath';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import styles from './About.module.css';

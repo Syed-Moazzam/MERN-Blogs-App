@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import HeroSection from '../../components/HeroSection';
-import allImages from '../../constant/imagePath';
+import allImages from '../../constants/imagePath';
 import { Col, Container, Row } from 'react-bootstrap';
 import Input from '../../components/Input';
 import styles from './Contact.module.css';

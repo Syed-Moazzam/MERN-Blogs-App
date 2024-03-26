@@ -10,6 +10,7 @@ const Header = () => {
                     <Link to='/'>HOME</Link>
                     <Link to='/about'>ABOUT</Link>
                     <Link to='/contact'>CONTACT</Link>
+                    <Link to='/create-blog'>CREATE BLOG</Link>
                     <Link to='/contact'>LOGOUT</Link>
                 </div>
                 <div className={styles.loginBtnOfHeader}>
