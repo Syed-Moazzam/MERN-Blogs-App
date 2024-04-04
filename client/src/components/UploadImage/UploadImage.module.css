@@ -1,6 +1,6 @@
 .uploadImageContainer {
-    width: 70%;
-    height: 80%;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     cursor: pointer;
     overflow: hidden;
@@ -13,44 +13,52 @@
 }
 
 .uploadImgOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    display: none;
-    position: absolute;
-    top: 0px;
-    left: 0px;
     background-color: rgba(0, 0, 0, 0.82);
-    font-size: 19px;
+    font-size: 18px;
     color: var(--white-color);
     border-radius: 50%;
 }
 
-.uploadImageContainer:hover .uploadImgOverlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.defaultImgOverlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.editOrDeleteImgOverlay {
+    display: none;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0px;
     left: 0px;
     background-color: rgba(0, 0, 0, 0.82);
-    font-size: 19px;
+    font-size: 18px;
     color: var(--white-color);
     border-radius: 50%;
     border: none;
 }
 
+.uploadImageContainer:hover .editOrDeleteImgOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.editOrDeleteImgOverlay>button {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+.editOrDeleteImgOverlay svg {
+    font-size: 30px;
+}
+
 .uploadImgIcon {
     font-size: 24px;
+    margin-bottom: 5px;
 }
 
 .uploadImageContainer>img {
@@ -64,13 +72,7 @@
     height: 100%;
 }
 
-.cloudinaryContextComponent {
+.previewImage {
     width: 100%;
     height: 100%;
-}
-
-.cloudinaryImageComponent {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }

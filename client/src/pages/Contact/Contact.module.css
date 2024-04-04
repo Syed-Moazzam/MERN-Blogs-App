@@ -17,8 +17,7 @@
 }
 
 .contactFormBtn {
-    width: 120px !important;
-    margin-top: 18px;
+    width: 100px;
 }
 
 .contactFormBtn:hover {

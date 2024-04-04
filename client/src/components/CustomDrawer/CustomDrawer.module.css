@@ -1,0 +1,20 @@
+.drawerContainer {
+    text-align: center;
+}
+
+.drawerList {
+    width: 280px;
+}
+
+svg {
+    font-size: 22.5px;
+    color: var(--black-color);
+}
+
+.drawerHeading {
+    margin: 25px 0px 8px;
+}
+
+.horizontalRuleOfDrawer {
+    color: #999494;
+}

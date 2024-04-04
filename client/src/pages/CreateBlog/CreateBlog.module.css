@@ -3,7 +3,8 @@
 }
 
 .publishBtnOfCreateBlogPage {
-    width: 12%;
+    width: 100px;
+    outline: none;
 }
 
 .uploadImageDiv {
