@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import styles from './CustomDrawer.module.css';
 
 const CustomDrawer = ({ openDrawer, toggleDrawer, drawerItems }) => {
