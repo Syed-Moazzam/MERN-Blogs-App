@@ -4,6 +4,7 @@ import { FiUpload } from 'react-icons/fi';
 import Loader from '../Loader';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Button from '../Button';
 
 const UploadImage = ({ value, setter, disabled }) => {
     const imgRef = useRef(null);
@@ -33,16 +34,16 @@ const UploadImage = ({ value, setter, disabled }) => {
     return (
         <div className={styles.uploadImageContainer}>
             <input type="file" accept='image/*' ref={imgRef} onChange={handleImageUpload} disabled={disabled} />
-            {!previewImg && <button className={styles.uploadImgOverlay} onClick={() => imgRef.current.click()}>
+            {!previewImg && <Button className={styles.uploadImgOverlay} onClick={() => imgRef.current.click()}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>
-            </button>}
+            </Button>}
 
             {previewImg &&
                 <>
                     <div className={styles.editOrDeleteImgOverlay}>
-                        <button onClick={() => imgRef.current.click()}><FaRegEdit /></button>
-                        <button onClick={handleImageDelete}><MdDelete /></button>
+                        <Button onClick={() => imgRef.current.click()}><FaRegEdit /></Button>
+                        <Button onClick={handleImageDelete}><MdDelete /></Button>
                     </div>
 
                     <img src={previewImg} alt="" className={styles.previewImage} />

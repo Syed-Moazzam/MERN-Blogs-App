@@ -57,7 +57,7 @@ const CreateBlog = () => {
             <HeroSection img={allImages?.createBlogImg} />
             <section className={styles.createBlogContainer}>
                 <Container>
-                    <Row>
+                    <Row className={styles.rowOfCreateBlogPage}>
                         <Col lg={4}>
                             <div className={styles.uploadImageDiv}>
                                 <UploadImage value={image} setter={setImage} disabled={loading} />

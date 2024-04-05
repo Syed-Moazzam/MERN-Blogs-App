@@ -5,9 +5,15 @@
     --secondary-color: #1976d2;
     --text-color: #2874f0;
     --grey-color: #878787;
+    --nav-links-color: #504e4e;
     --secondary-hover-color: #1565c0;
     --footer-color: #ECF9FE;
     --footer-dark-color: #DBF4FD;
+    --scrollbar-color: #c2bdbd;
+    --scrollbar-hover-color: #a9a0a0;
+    --searchbar-border-color: #E2E8F0;
+    --searchbar-focused-border-color: #abaaaa;
+    --svg-icon-color: #302d2d;
 }
 
 @font-face {
@@ -88,6 +94,10 @@ body button {
 body a {
     font-family: 'poppins-medium';
     font-size: 16px;
+    color: var(--nav-links-color);
+}
+
+body a:hover {
     color: var(--black-color);
 }
 
@@ -103,7 +113,34 @@ body footer {
     color: var(--black-color);
 }
 
+body svg {
+    font-size: 22.5px;
+    color: var(--svg-icon-color);
+    cursor: pointer;
+}
+
+body svg:hover {
+    color: var(--black-color);
+}
+
 .css-10hburv-MuiTypography-root {
     font-family: 'poppins-regular' !important;
-    font-size: 16px !important;
+    font-size: 15.5px !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover-color);
 }

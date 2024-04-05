@@ -10,6 +10,11 @@
     margin-top: 22px;
 }
 
+.createBlogButtonOfHome {
+    width: 100%;
+    height: 42px;
+}
+
 .eachCategoryContainer {
     border-bottom: 1px solid #ccc;
     line-height: 1.43;
@@ -19,9 +24,4 @@
 
 .eachCategoryContainer a {
     font-size: 15.5px;
-    color: #504e4e;
-}
-
-.eachCategoryContainer a:hover {
-    color: var(--black-color);
 }

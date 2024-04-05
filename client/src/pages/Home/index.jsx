@@ -38,7 +38,7 @@ const Home = () => {
             <Container fluid className={styles.blogsCategoryContainer}>
                 <Row>
                     <Col lg={2}>
-                        <Button btnText={'CREATE BLOG'} onClick={() => navigate('/create-blog')} />
+                        <Button btnText={'CREATE BLOG'} className={styles.createBlogButtonOfHome} onClick={() => navigate('/create-blog')} />
                         <div className={styles.categoriesMainContainer}>
                             {categories?.map((category, key) => {
                                 return (

@@ -6,7 +6,8 @@ import contactImg from '../assets/images/contact.jpg';
 import contactImg2 from '../assets/images/contact-img-2.avif';
 import mainBgImg from '../assets/images/main-bg-img.jpg';
 import createBlogImg from '../assets/images/create-blog-img.jpg';
-import blogDefaultImg from '../assets/images/blog-default-img.jpg';
+import defaultBlogImg from '../assets/images/default-blog-img.png';
+import defaultUserAvatar from '../assets/images/default-user-avatar.png';
 
 const allImages = {
     loginSignupBoxImg,
@@ -17,7 +18,8 @@ const allImages = {
     contactImg2,
     mainBgImg,
     createBlogImg,
-    blogDefaultImg
+    defaultBlogImg,
+    defaultUserAvatar
 };
 
 export default allImages;

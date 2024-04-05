@@ -6,9 +6,13 @@
     width: 280px;
 }
 
-svg {
-    font-size: 22.5px;
-    color: var(--black-color);
+.drawerListItem {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+.activeLink {
+    background-color: rgb(0 0 0 / 10%) !important;
 }
 
 .drawerHeading {
@@ -17,4 +21,12 @@ svg {
 
 .horizontalRuleOfDrawer {
     color: #999494;
+}
+
+
+/* media queries */
+@media screen and (max-width: 576px) {
+    .drawerList {
+        width: 260px;
+    }
 }
