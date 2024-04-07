@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
                     email: user?.email
                 }, process.env.JWT_SECRET_KEY);
 
-                res.cookie('token', token, { httpOnly: false, secure: false, maxAge: 1800000 }).send({ status: 'success', message: 'Logged In Successfully!' });
+                res.cookie('token', token, { httpOnly: false, secure: false, maxAge: 3600000 }).send({ status: 'success', message: 'Logged In Successfully!' });
             }
             else {
                 res.send({ status: 'error', message: 'Incorrect Password!' });

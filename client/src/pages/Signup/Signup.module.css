@@ -31,9 +31,13 @@
     color: var(--secondary-color);
     background-color: var(--white-color);
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-    width: 100%;
+    width: 330px !important;
     margin-top: 14px;
     border: none;
+}
+
+.signupBtn:hover {
+    color: var(--white-color);
 }
 
 .orKeywordStyling {

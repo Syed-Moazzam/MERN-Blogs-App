@@ -29,7 +29,7 @@
 
 .loginBtn {
     background-color: var(--primary-color);
-    width: 100%;
+    width: 330px !important;
     margin-top: 14px;
     border: none;
 }

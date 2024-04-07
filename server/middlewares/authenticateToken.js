@@ -4,7 +4,7 @@ const authenticateToken = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).send({ error: 'Unauthorized Or Invalid Token' });
     }
 
     try {
@@ -14,7 +14,7 @@ const authenticateToken = (req, res, next) => {
         // Proceed to the next middleware or route handler
         next();
     } catch (error) {
-        return res.status(403).json({ error: 'Forbidden' });
+        return res.status(403).send({ error: 'Forbidden' });
     }
 };
 

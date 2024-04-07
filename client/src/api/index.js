@@ -57,16 +57,22 @@ export const uploadImagesToCloudinary = async (formData) => {
     return axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`, formData);
 }
 
+// api for sending emails through nodemailer
+export const sendEmail = async (reqBody) => {
+    return axios.post(`${baseUrl}/send-email`, reqBody);
+}
+
 // for checking token validity
 export const isCookieTokenValid = () => {
     const token = Cookies.get('token');
-    const currentTime = Math.floor(Date.now() / 1000);
-
-    if (token) {
-        const decoded = jwtDecode(token);
-        if (decoded?.exp > currentTime) {
-            return decoded;
-        }
-    }
+    if (token) return true;
     else return false;
+
+    // const currentTime = Math.floor(Date.now() / 1000);
+    // if (token) {
+    //     const decoded = jwtDecode(token);
+    //     if (decoded?.exp > currentTime) {
+    //         return decoded;
+    //     }
+    // }
 }

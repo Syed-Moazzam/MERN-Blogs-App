@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { getAllBlogs, getSingleBlog, createBlog, updateBlog, deleteBlog } = require('../controllers/blogs');
+const { getAllBlogs, getSingleBlog, createBlog, updateBlog, deleteBlog } = require('../controllers/blog');
 const authenticateToken = require('../middlewares/authenticateToken');
 
 router.get('/get-all-blogs', getAllBlogs);

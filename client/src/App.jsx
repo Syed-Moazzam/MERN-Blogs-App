@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './assets/styles/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loader from './components/Loader';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -13,24 +14,16 @@ const Contact = lazy(() => import('./pages/Contact'));
 const CreateBlog = lazy(() => import('./pages/CreateBlog'));
 
 function App() {
-  const loaderStyling = {
-    width: '120px',
-    height: '120px',
-    dispplay: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-
   return (
     <BrowserRouter>
       <Suspense fallback={<Loader animation={'border'} variant={'primary'} />}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/create-blog' element={<CreateBlog />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/contact' element={<ProtectedRoute path={'/contact'} component={Contact} />} />
+          <Route path='/create-blog' element={<ProtectedRoute path={'/create-blog'} component={CreateBlog} />} />
+          <Route path='/login' element={<ProtectedRoute path={'/login'} component={Login} />} />
+          <Route path='/signup' element={<ProtectedRoute path={'/signup'} component={Signup} />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
