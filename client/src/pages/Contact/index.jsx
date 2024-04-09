@@ -10,21 +10,21 @@ import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
 import { sendEmail } from '../../api';
 import validator from 'validator';
-import showToast from '../../utils/showToast';
+import showToast from '../../utils/Toast';
 
 const Contact = () => {
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleEmailSubmit = () => {
-        if (validator.isEmpty(name) || !validator.isEmail(email) || validator.isEmpty(message)) {
-            showToast('error', 'Please Fill In All The Fields Correctly!');
+        if (validator.isEmpty(username) || !validator.isEmail(email) || validator.isEmpty(message)) {
+            showToast('error', 'Please Fill In All The Required Fields Correctly!');
         }
         else {
             setLoading(true);
-            sendEmail({ name, email, message }).then((res) => {
+            sendEmail({ username, email, message }).then((res) => {
                 console.log('res', res);
             }).catch((err) => {
                 console.log('error', err);
@@ -43,7 +43,7 @@ const Contact = () => {
                         <Col lg={7}>
                             <div className={styles.contactForm}>
                                 <h2>Get In Touch!</h2>
-                                <Input value={name} setter={setName} placeholder={'Enter Your Name'} type={'text'} />
+                                <Input value={username} setter={setUsername} placeholder={'Enter Your Name'} type={'text'} />
                                 <Input value={email} setter={setEmail} placeholder={'Enter Your Email'} type={'email'} />
                                 <TextArea value={message} setter={setMessage} placeholder={'Enter Your Message...'} />
                                 <Button btnText={'Submit'} loading={loading} className={styles.contactFormBtn} onClick={handleEmailSubmit} />

@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 const showToast = (status, message) => {
     if (status === 'success') {
-        toast.info(message, {
+        toast.success(message, {
             position: "top-right",
             autoClose: 3000,
         });

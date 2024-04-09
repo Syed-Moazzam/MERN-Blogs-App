@@ -11,6 +11,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import Avatar from '../Avatar';
+import { isCookieTokenValid } from '../../api';
 
 const Header = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -26,8 +27,7 @@ const Header = () => {
         { icon: FaHeadphonesSimple, name: 'Contact', navigateTo: '/contact' },
         { icon: IoMdAddCircle, name: 'Create Blog', navigateTo: '/create-blog' },
         { icon: FaUserCircle, name: 'Profile', navigateTo: '/profile' },
-        { icon: MdOutlineLogin, name: 'Login', navigateTo: '/login' },
-        { icon: MdOutlineLogout, name: 'Logout' }
+        !isCookieTokenValid() ? { icon: MdOutlineLogin, name: 'Login', navigateTo: '/login' } : { icon: MdOutlineLogout, name: 'Logout' }
     ];
 
     return (
@@ -35,7 +35,7 @@ const Header = () => {
             <div className={styles.headerMainContainerDiv}>
                 <Button className={styles.hamburgerIconOfHeader} onClick={toggleDrawer}><GiHamburgerMenu /></Button>
                 <SearchBar value={searchInput} setter={setSearchInput} type={'text'} placeholder={'Search Blogs By Title Or Category...'} searchBtnText={'Search'} className={styles.searchbarOfHeader} />
-                <Avatar className={styles.userAvatarOfHeader} />
+                {isCookieTokenValid() && <Avatar className={styles.userAvatarOfHeader} />}
             </div>
 
             <CustomDrawer openDrawer={openDrawer} toggleDrawer={toggleDrawer} drawerTitle={'StoryStreamline'} drawerItems={drawerItems} />

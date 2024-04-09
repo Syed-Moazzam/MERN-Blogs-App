@@ -5,20 +5,50 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
+import validator from 'validator';
+import showToast from '../../utils/Toast';
+import { signupApi } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleSignup = async () => {
+        if (validator.isEmpty(username) || validator.isEmpty(email) || validator.isEmpty(password)) {
+            showToast('error', 'Please Fill In All The Required Fields Correctly!');
+        }
+        else {
+            setLoading(true);
+            signupApi({ username, email, password }).then((res) => {
+                if (res?.data?.status === 'success') {
+                    showToast('success', 'Account Created Successfully!');
+                    navigate('/login');
+                }
+                else {
+                    showToast('error', res?.data?.message);
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                }
+            }).catch((err) => {
+                showToast('error', err.message);
+            }).finally(() => setLoading(false));
+        }
+    }
 
     return (
         <div className={styles.signupPageMainContainer}>
             <div className={styles.signupBoxContainer}>
                 <img src={allImages?.loginSignupBoxImg} alt='' />
-                <Input value={name} setter={setName} type={'text'} placeholder={'Enter Name'} />
+                <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name'} />
                 <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address'} />
                 <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password'} />
-                <Button btnText={'Signup'} className={styles.signupBtn} />
+                <Button btnText={'Signup'} className={styles.signupBtn} loading={loading} onClick={handleSignup} />
                 <p className={styles.orKeywordStyling}>OR</p>
                 <Link to='/login' className={styles.alreadyHaveAccountLink}>Already Have An Account?</Link>
                 <hr />

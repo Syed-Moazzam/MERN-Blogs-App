@@ -2,11 +2,11 @@ const transporter = require('../nodemailerConfig');
 
 exports.sendEmail = async (req, res) => {
     try {
-        const { name, email, message } = req.body;
+        const { username, email, message } = req.body;
         console.log('user email', email);
 
         await transporter.sendMail({
-            from: `${name} <${email}>`,
+            from: `${username} <${email}>`,
             to: process.env.USER,
             subject: 'Contacting Via Blogs Application',
             html: `<h2>${message}</h2>`

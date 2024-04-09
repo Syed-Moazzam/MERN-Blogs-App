@@ -25,6 +25,15 @@
     border-radius: 50%;
 }
 
+.uploadImgOverlay:hover {
+    background-color: rgba(0, 0, 0, 0.82);
+    color: #dfdfdf;
+}
+
+.uploadImgOverlay:hover .uploadImgIcon {
+    color: #dfdfdf;
+}
+
 .editOrDeleteImgOverlay {
     display: none;
     width: 300px;
@@ -46,10 +55,22 @@
     gap: 20px;
 }
 
-.editOrDeleteImgOverlay>button {
+.editOrDeleteImgOverlay button {
     background-color: transparent;
     border: none;
     padding: 0px;
+}
+
+.editOrDeleteImgOverlay button:hover {
+    background-color: transparent;
+}
+
+.editOrDeleteImgOverlay svg {
+    color: var(--white-color);
+}
+
+.editOrDeleteImgOverlay svg:hover {
+    color: #dfdfdf;
 }
 
 .editOrDeleteImgOverlay svg {
@@ -59,6 +80,7 @@
 .uploadImgIcon {
     font-size: 24px;
     margin-bottom: 5px;
+    color: var(--white-color);
 }
 
 .uploadImageContainer>img {

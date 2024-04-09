@@ -10,7 +10,7 @@ const UploadImage = ({ value, setter, disabled }) => {
     const imgRef = useRef(null);
     const [previewImg, setPreviewImg] = useState('');
 
-    const handleImageUpload = async (e) => {
+    const handleImagePreview = async (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
         if (file) {
@@ -33,7 +33,7 @@ const UploadImage = ({ value, setter, disabled }) => {
 
     return (
         <div className={styles.uploadImageContainer}>
-            <input type="file" accept='image/*' ref={imgRef} onChange={handleImageUpload} disabled={disabled} />
+            <input type="file" accept='image/*' ref={imgRef} onChange={handleImagePreview} disabled={disabled} />
             {!previewImg && <Button className={styles.uploadImgOverlay} onClick={() => imgRef.current.click()}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>

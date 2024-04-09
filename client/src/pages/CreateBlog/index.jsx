@@ -11,7 +11,7 @@ import DropDown from '../../components/Dropdown';
 import UploadImage from '../../components/UploadImage';
 import styles from './CreateBlog.module.css';
 import validator from 'validator';
-import showToast from '../../utils/showToast';
+import showToast from '../../utils/Toast';
 import { uploadImagesToCloudinary } from '../../api';
 
 const CreateBlog = () => {
@@ -31,7 +31,7 @@ const CreateBlog = () => {
 
     const handleBlogCreation = () => {
         if (validator.isEmpty(blogTitle) || validator.isEmpty(blogCategory) || validator.isEmpty(blogStory)) {
-            showToast('error', 'Please Fill In All Required Fields!');
+            showToast('error', 'Please Fill In All The Required Fields Correctly!');
         }
         else if (!image) {
             showToast('error', 'Please Upload Blog Image!');
