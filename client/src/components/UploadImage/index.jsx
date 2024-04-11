@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 import styles from './UploadImage.module.css';
 import { FiUpload } from 'react-icons/fi';
-import Loader from '../Loader';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from '../Button';
 
-const UploadImage = ({ value, setter, disabled }) => {
+const UploadImage = ({ value, setter, className, disabled }) => {
     const imgRef = useRef(null);
     const [previewImg, setPreviewImg] = useState('');
 
@@ -34,14 +33,14 @@ const UploadImage = ({ value, setter, disabled }) => {
     return (
         <div className={styles.uploadImageContainer}>
             <input type="file" accept='image/*' ref={imgRef} onChange={handleImagePreview} disabled={disabled} />
-            {!previewImg && <Button className={styles.uploadImgOverlay} onClick={() => imgRef.current.click()}>
+            {!previewImg && <Button className={[className && className, styles.uploadImgOverlay].join(' ')} onClick={() => imgRef.current.click()}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>
             </Button>}
 
             {previewImg &&
                 <>
-                    <div className={styles.editOrDeleteImgOverlay}>
+                    <div className={[className && className, styles.editOrDeleteImgOverlay].join(' ')}>
                         <Button onClick={() => imgRef.current.click()}><FaRegEdit /></Button>
                         <Button onClick={handleImageDelete}><MdDelete /></Button>
                     </div>

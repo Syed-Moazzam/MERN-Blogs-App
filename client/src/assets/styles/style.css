@@ -7,6 +7,7 @@
     --grey-color: #878787;
     --nav-links-color: #504e4e;
     --secondary-hover-color: #1565c0;
+    --primary-hover-color: #eb5e1b;
     --footer-color: #ECF9FE;
     --footer-dark-color: #DBF4FD;
     --scrollbar-color: #c2bdbd;
@@ -14,6 +15,10 @@
     --searchbar-border-color: #E2E8F0;
     --searchbar-focused-border-color: #abaaaa;
     --svg-icon-color: #302d2d;
+    --green-color: #198754;
+    --green-hover-color: #157347;
+    --red-color: #dc3545;
+    --red-hover-color: #bb2d3b;
 }
 
 @font-face {

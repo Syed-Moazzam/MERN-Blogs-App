@@ -7,11 +7,12 @@ import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
-const Login = lazy(() => import('./pages/Login'));
-const Signup = lazy(() => import('./pages/Signup'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const CreateBlog = lazy(() => import('./pages/CreateBlog'));
+const UserProfile = lazy(() => import('./pages/UserProfile'));
+const Login = lazy(() => import('./pages/Login'));
+const Signup = lazy(() => import('./pages/Signup'));
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<ProtectedRoute path={'/contact'} component={Contact} />} />
           <Route path='/create-blog' element={<ProtectedRoute path={'/create-blog'} component={CreateBlog} />} />
+          <Route path='user-profile' element={<ProtectedRoute path={'user-profile'} component={UserProfile} />} />
           <Route path='/login' element={<ProtectedRoute path={'/login'} component={Login} />} />
           <Route path='/signup' element={<ProtectedRoute path={'/signup'} component={Signup} />} />
         </Routes>

@@ -12,14 +12,17 @@ import UploadImage from '../../components/UploadImage';
 import styles from './CreateBlog.module.css';
 import validator from 'validator';
 import showToast from '../../utils/Toast';
-import { uploadImagesToCloudinary } from '../../api';
+import { createBlog, uploadImageToCloudinary } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const CreateBlog = () => {
     const [blogTitle, setBlogTitle] = useState('');
     const [blogStory, setBlogStory] = useState('');
     const [blogCategory, setBlogCategory] = useState('');
-    const [image, setImage] = useState('');
+    const [blogImage, setBlogImage] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const options = [
         { label: 'Music', value: 'Music' },
@@ -33,18 +36,38 @@ const CreateBlog = () => {
         if (validator.isEmpty(blogTitle) || validator.isEmpty(blogCategory) || validator.isEmpty(blogStory)) {
             showToast('error', 'Please Fill In All The Required Fields Correctly!');
         }
-        else if (!image) {
+        else if (!blogImage) {
             showToast('error', 'Please Upload Blog Image!');
         }
         else {
             const formData = new FormData();
-            formData.append('file', image);
+            formData.append('file', blogImage);
             formData.append('upload_preset', `${import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET}`);
 
             // Uploading image to Cloudinary
             setLoading(true);
-            uploadImagesToCloudinary(formData).then((response) => {
-                setImage(response?.data?.secure_url);
+            uploadImageToCloudinary(formData).then((response) => {
+                setBlogImage(response?.data?.secure_url);
+                const img = response?.data?.secure_url;
+
+                const reqBody = {
+                    title: blogTitle,
+                    category: blogCategory,
+                    story: blogStory,
+                    blogImg: img
+                }
+                createBlog(reqBody).then((res) => {
+                    if (res?.data?.status === 'success') {
+                        showToast('success', res?.data?.message);
+                        navigate('/');
+                    }
+                }).catch((err) => {
+                    showToast('error', err?.message);
+                    setBlogTitle("");
+                    setBlogCategory("");
+                    setBlogStory("");
+                    setBlogImage("");
+                });
             }).catch((error) => {
                 console.log('image could not be uploaded due to', error);
             }).finally(() => setLoading(false));
@@ -60,7 +83,7 @@ const CreateBlog = () => {
                     <Row className={styles.rowOfCreateBlogPage}>
                         <Col lg={4}>
                             <div className={styles.uploadImageDiv}>
-                                <UploadImage value={image} setter={setImage} disabled={loading} />
+                                <UploadImage value={blogImage} setter={setBlogImage} disabled={loading} />
                             </div>
                         </Col>
                         <Col lg={8}>

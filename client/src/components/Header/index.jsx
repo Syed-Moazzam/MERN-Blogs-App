@@ -26,7 +26,7 @@ const Header = () => {
         { icon: BsFillInfoCircleFill, name: 'About', navigateTo: '/about' },
         { icon: FaHeadphonesSimple, name: 'Contact', navigateTo: '/contact' },
         { icon: IoMdAddCircle, name: 'Create Blog', navigateTo: '/create-blog' },
-        { icon: FaUserCircle, name: 'Profile', navigateTo: '/profile' },
+        { icon: FaUserCircle, name: 'Profile', navigateTo: '/user-profile' },
         !isCookieTokenValid() ? { icon: MdOutlineLogin, name: 'Login', navigateTo: '/login' } : { icon: MdOutlineLogout, name: 'Logout' }
     ];
 

@@ -7,7 +7,8 @@ exports.getUser = async (req, res) => {
         const decodedUser = req.user;
         if (req.body.userId === decodedUser?._id) {
             const user = await User.findById({ _id: decodedUser?._id });
-            res.send({ status: 'success', data: user });
+            const { password, ...userWithoutPwd } = user?._doc;
+            res.send({ status: 'success', data: userWithoutPwd });
         }
         else {
             res.send({ status: 'error', message: "You Can Only Access Your Own Information!" });

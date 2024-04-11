@@ -1,0 +1,68 @@
+.rowOfUserProfileSection {
+    width: 50%;
+    margin: 130px auto;
+}
+
+.rowOfUserProfileSection>div {
+    display: flex;
+    justify-content: center;
+}
+
+.containerOfUserProfileImg {
+    margin-bottom: 30px;
+}
+
+.uploadImgComponentForUserProfile {
+    width: 220px !important;
+    height: 220px !important;
+}
+
+.uploadImgComponentForUserProfile>span {
+    font-size: 17px;
+}
+
+.uploadImgComponentForUserProfile>span svg {
+    font-size: 22px;
+}
+
+.containerOfUpdateAndDeleteProfile {
+    margin-top: 32px;
+    align-items: center;
+    gap: 20px;
+}
+
+.updateUserProfileBtn {
+    color: var(--white-color) !important;
+    background-color: var(--green-color) !important;
+    width: 172px;
+}
+
+.updateUserProfileBtn svg {
+    color: var(--white-color) !important;
+    margin-right: 5px;
+}
+
+.updateUserProfileBtn:hover {
+    outline: none !important;
+}
+
+.deleteUserProfileBtn {
+    color: var(--white-color) !important;
+    background-color: var(--red-color) !important;
+    width: 172px;
+}
+
+.deleteUserProfileBtn svg {
+    color: var(--white-color) !important;
+    margin-right: 5px;
+}
+
+.updateUserProfileBtn:hover {
+    border-color: var(--green-hover-color) !important;
+    background-color: var(--green-hover-color) !important;
+}
+
+.deleteUserProfileBtn:hover {
+    border-color: var(--red-hover-color) !important;
+    background-color: var(--red-hover-color) !important;
+}

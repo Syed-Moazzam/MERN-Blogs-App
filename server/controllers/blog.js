@@ -3,7 +3,7 @@ const Blog = require('../models/Blog');
 exports.createBlog = async (req, res) => {
     try {
         const decodedUser = req.user;
-        const newBlog = await Blog.create({
+        await Blog.create({
             authorId: decodedUser?._id,
             authorEmail: decodedUser?.email,
             title: req.body?.title,
@@ -11,7 +11,7 @@ exports.createBlog = async (req, res) => {
             story: req.body?.story,
             blogImg: req.body?.blogImg
         });
-        res.send({ status: 'success', data: newBlog });
+        res.send({ status: 'success', message: 'Blog Created Successfully!' });
     }
     catch (error) {
         res.status(505).send({ status: 'error', message: error.message });
