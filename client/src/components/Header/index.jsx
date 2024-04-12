@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from '../Button';
 import SearchBar from '../SearchBar';
@@ -11,14 +11,28 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import Avatar from '../Avatar';
-import { isCookieTokenValid } from '../../api';
+import { isCookieTokenValid, logoutApi } from '../../api';
+import showToast from '../../utils/Toast';
 
 const Header = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const [searchInput, setSearchInput] = useState('');
 
-    const toggleDrawer = () => {
+    const navigate = useNavigate();
+
+    const toggleDrawer = (name) => {
         setOpenDrawer(!openDrawer);
+
+        if (name === 'Logout') {
+            logoutApi().then((res) => {
+                if (res?.data?.status === 'success') {
+                    showToast('success', res?.data?.message);
+                    navigate('/');
+                }
+            }).catch((err) => {
+                showToast('error', err.message);
+            });
+        }
     }
 
     const drawerItems = [

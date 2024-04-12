@@ -14,9 +14,9 @@ const CustomDrawer = ({ openDrawer, toggleDrawer, drawerTitle, drawerItems, user
                 {drawerItems?.map(({ icon: Icon, name, navigateTo }, index) => {
                     return (
                         <>
-                            <Link to={navigateTo} key={index} onClick={toggleDrawer}>
+                            <Link to={navigateTo} key={index} onClick={() => toggleDrawer(name)}>
                                 <ListItem className={styles.drawerListItem}>
-                                    <ListItemButton className={pathname === navigateTo && styles.activeLink}>
+                                    <ListItemButton className={[pathname === navigateTo && styles.activeLink].join('')}>
                                         <ListItemIcon>
                                             <Icon />
                                         </ListItemIcon>

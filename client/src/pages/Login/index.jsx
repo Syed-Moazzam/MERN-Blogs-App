@@ -9,6 +9,10 @@ import validator from 'validator';
 import { loginApi } from '../../api';
 import showToast from '../../utils/Toast';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/user/userSlice';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +20,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = () => {
         if (!validator.isEmail(email) || validator.isEmpty(password)) {
@@ -27,6 +32,10 @@ const Login = () => {
                 if (res?.data?.status === 'success') {
                     showToast('success', res?.data?.message);
                     navigate('/');
+                    const accessToken = Cookies.get('access_token');
+                    const decodedToken = jwtDecode(accessToken);
+                    const { iat, ...user } = decodedToken;
+                    dispatch(login(user));
                 }
                 else {
                     showToast('error', res?.data?.message);
