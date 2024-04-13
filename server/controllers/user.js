@@ -4,8 +4,9 @@ const bcrypt = require('bcryptjs');
 
 exports.getUser = async (req, res) => {
     try {
+        const { userId } = req.params;
         const decodedUser = req.user;
-        if (req.body.userId === decodedUser?._id) {
+        if (userId === decodedUser?._id) {
             const user = await User.findById({ _id: decodedUser?._id });
             const { password, ...userWithoutPwd } = user?._doc;
             res.send({ status: 'success', data: userWithoutPwd });

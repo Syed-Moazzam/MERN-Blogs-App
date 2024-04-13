@@ -43,8 +43,8 @@ const Contact = () => {
                         <Col lg={7}>
                             <div className={styles.contactForm}>
                                 <h2>Get In Touch!</h2>
-                                <Input value={username} setter={setUsername} placeholder={'Enter Your Name'} type={'text'} />
-                                <Input value={email} setter={setEmail} placeholder={'Enter Your Email'} type={'email'} />
+                                <Input value={username} setter={setUsername} placeholder={'Enter Your Name...'} type={'text'} />
+                                <Input value={email} setter={setEmail} placeholder={'Enter Your Email...'} type={'email'} />
                                 <TextArea value={message} setter={setMessage} placeholder={'Enter Your Message...'} />
                                 <Button btnText={'Submit'} loading={loading} className={styles.contactFormBtn} onClick={handleEmailSubmit} />
                             </div>

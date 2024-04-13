@@ -16,7 +16,7 @@ export const logoutApi = async () => {
 
 // user api`s
 export const getUser = async (userId) => {
-    return axios.get(`/api/get-user`, userId);
+    return axios.get(`/api/get-user/${userId}`);
 }
 
 export const updateUser = async (reqBody) => {
