@@ -19,7 +19,7 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const handleSignup = async () => {
-        if (validator.isEmpty(username) || validator.isEmpty(email) || validator.isEmpty(password)) {
+        if (validator.isEmpty(username) || !validator.isEmail(email) || validator.isEmpty(password)) {
             showToast('error', 'Please Fill In All The Required Fields Correctly!');
         }
         else {

@@ -30,7 +30,7 @@ exports.updateUser = async (req, res) => {
 
             const updatedUser = await User.findByIdAndUpdate({ _id: decodedUser?._id }, { $set: req.body }, { new: true });
             const { password, ...userWithoutPwd } = updatedUser?._doc;
-            res.send({ status: 'success', data: userWithoutPwd });
+            res.send({ status: 'success', message: "Data Updated Successfully!", data: userWithoutPwd });
         }
         else {
             res.send({ status: 'error', message: "You Can Only Update Your Own Information!" });

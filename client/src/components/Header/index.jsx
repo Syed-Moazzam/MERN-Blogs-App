@@ -13,12 +13,17 @@ import { BsFillInfoCircleFill } from "react-icons/bs";
 import Avatar from '../Avatar';
 import { isCookieTokenValid, logoutApi } from '../../api';
 import showToast from '../../utils/Toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/user/userSlice';
 
 const Header = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const [searchInput, setSearchInput] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state?.user);
 
     const toggleDrawer = (name) => {
         setOpenDrawer(!openDrawer);
@@ -27,6 +32,7 @@ const Header = () => {
             logoutApi().then((res) => {
                 if (res?.data?.status === 'success') {
                     showToast('success', res?.data?.message);
+                    dispatch(logout());
                     navigate('/');
                 }
             }).catch((err) => {
@@ -49,7 +55,7 @@ const Header = () => {
             <div className={styles.headerMainContainerDiv}>
                 <Button className={styles.hamburgerIconOfHeader} onClick={toggleDrawer}><GiHamburgerMenu /></Button>
                 <SearchBar value={searchInput} setter={setSearchInput} type={'text'} placeholder={'Search Blogs By Title Or Category...'} searchBtnText={'Search'} className={styles.searchbarOfHeader} />
-                {isCookieTokenValid() && <Avatar className={styles.userAvatarOfHeader} />}
+                {isCookieTokenValid() && <Avatar img={user?.profileImg} className={styles.userAvatarOfHeader} />}
             </div>
 
             <CustomDrawer openDrawer={openDrawer} toggleDrawer={toggleDrawer} drawerTitle={'StoryStreamline'} drawerItems={drawerItems} />

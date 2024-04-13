@@ -4,7 +4,7 @@ import styles from './Avatar.module.css';
 
 const Avatar = ({ img, className }) => {
     return (
-        <div className={styles.avatarContainer}>
+        <div className={[img && styles.avatarContainer].join('')}>
             <img src={img ? img : allImages?.defaultUserAvatar} alt="" className={[className && className, styles.avatarImage].join(' ')} />
         </div>
     )

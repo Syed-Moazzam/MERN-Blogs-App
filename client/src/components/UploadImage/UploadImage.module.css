@@ -93,6 +93,12 @@
     object-fit: cover;
 }
 
+.userPreviewImage {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+}
+
 
 /* media queries */
 @media screen and (max-width: 992px) {

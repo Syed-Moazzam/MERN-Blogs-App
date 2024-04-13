@@ -3,7 +3,7 @@ import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } fr
 import { Link, useLocation } from 'react-router-dom';
 import styles from './CustomDrawer.module.css';
 
-const CustomDrawer = ({ openDrawer, toggleDrawer, drawerTitle, drawerItems, user }) => {
+const CustomDrawer = ({ openDrawer, toggleDrawer, drawerTitle, drawerItems }) => {
     const pathname = useLocation().pathname;
 
     return (

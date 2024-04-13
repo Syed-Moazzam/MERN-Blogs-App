@@ -5,7 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from '../Button';
 
-const UploadImage = ({ value, setter, className, disabled }) => {
+const UploadImage = ({ value, setter, className, disabled, user }) => {
     const imgRef = useRef(null);
     const [previewImg, setPreviewImg] = useState('');
 
@@ -33,19 +33,19 @@ const UploadImage = ({ value, setter, className, disabled }) => {
     return (
         <div className={styles.uploadImageContainer}>
             <input type="file" accept='image/*' ref={imgRef} onChange={handleImagePreview} disabled={disabled} />
-            {!previewImg && <Button className={[className && className, styles.uploadImgOverlay].join(' ')} onClick={() => imgRef.current.click()}>
+            {(!previewImg && !value) && <Button className={[className && className, styles.uploadImgOverlay].join(' ')} onClick={() => imgRef.current.click()}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>
             </Button>}
 
-            {previewImg &&
+            {(previewImg || value) &&
                 <>
                     <div className={[className && className, styles.editOrDeleteImgOverlay].join(' ')}>
                         <Button onClick={() => imgRef.current.click()}><FaRegEdit /></Button>
                         <Button onClick={handleImageDelete}><MdDelete /></Button>
                     </div>
 
-                    <img src={previewImg} alt="" className={styles.previewImage} />
+                    <img src={typeof value === 'string' ? value : previewImg} alt="" className={[styles.previewImage, user && styles.userPreviewImage].join(' ')} />
                 </>
             }
         </div>

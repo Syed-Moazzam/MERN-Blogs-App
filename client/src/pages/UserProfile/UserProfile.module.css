@@ -46,6 +46,11 @@
     outline: none !important;
 }
 
+.disabledUpdateBtn {
+    pointer-events: none;
+    background-color: #559779 !important;
+}
+
 .deleteUserProfileBtn {
     color: var(--white-color) !important;
     background-color: var(--red-color) !important;

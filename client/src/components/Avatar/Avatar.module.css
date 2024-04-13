@@ -1,5 +1,10 @@
+.avatarContainer {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 .avatarImage {
     width: 40px;
-    height: auto;
+    height: 40px;
     cursor: pointer;
 }
