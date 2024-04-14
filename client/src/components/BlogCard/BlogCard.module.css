@@ -1,8 +1,9 @@
 .blogCardContainer {
     text-align: center;
     cursor: pointer;
-    padding-top: 15px;
-    padding-bottom: 30px;
+    padding: 15px 15px 25px;
+    max-height: 480px;
+    height: 100%;
 }
 
 .blogCardText {
@@ -14,6 +15,6 @@
 }
 
 .blogCardImg {
-    height: 200px;
+    height: 180px;
     object-fit: cover;
 }

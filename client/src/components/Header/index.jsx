@@ -11,33 +11,24 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import Avatar from '../Avatar';
-import { isCookieTokenValid, logoutApi } from '../../api';
-import showToast from '../../utils/Toast';
+import { isCookieTokenValid } from '../../api';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../redux/user/userSlice';
+import LogoutModal from '../../modals/LogoutModal';
 
 const Header = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const [searchInput, setSearchInput] = useState('');
-
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
 
     const user = useSelector((state) => state?.user);
+
+    const navigate = useNavigate();
 
     const toggleDrawer = (name) => {
         setOpenDrawer(!openDrawer);
 
         if (name === 'Logout') {
-            logoutApi().then((res) => {
-                if (res?.data?.status === 'success') {
-                    showToast('success', res?.data?.message);
-                    dispatch(logout());
-                    navigate('/');
-                }
-            }).catch((err) => {
-                showToast('error', err.message);
-            });
+            setShowModal(true);
         }
     }
 
@@ -55,10 +46,12 @@ const Header = () => {
             <div className={styles.headerMainContainerDiv}>
                 <Button className={styles.hamburgerIconOfHeader} onClick={toggleDrawer}><GiHamburgerMenu /></Button>
                 <SearchBar value={searchInput} setter={setSearchInput} type={'text'} placeholder={'Search Blogs By Title Or Category...'} searchBtnText={'Search'} className={styles.searchbarOfHeader} />
-                {isCookieTokenValid() && <Avatar img={user?.profileImg} className={styles.userAvatarOfHeader} />}
+                {isCookieTokenValid() && <Avatar img={user?.profileImg} className={styles.userAvatarOfHeader} onClick={() => navigate('/user-profile')} />}
             </div>
 
             <CustomDrawer openDrawer={openDrawer} toggleDrawer={toggleDrawer} drawerTitle={'StoryStreamline'} drawerItems={drawerItems} />
+
+            {showModal && <LogoutModal show={showModal} onHide={setShowModal} />}
         </>
     )
 }

@@ -13,6 +13,7 @@ import validator from 'validator';
 import showToast from '../../utils/Toast';
 import { updateUser, uploadImageToCloudinary } from '../../api';
 import { updateAuthenticatedUser } from '../../redux/user/userSlice';
+import DeleteProfileModal from '../../modals/DeleteProfileModal';
 
 const UserProfile = () => {
     const [username, setUsername] = useState("");
@@ -20,6 +21,7 @@ const UserProfile = () => {
     const [password, setPassword] = useState("");
     const [userImage, setUserImage] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const user = useSelector((state) => state?.user);
     const dispatch = useDispatch();
@@ -49,20 +51,21 @@ const UserProfile = () => {
             }
 
             const reqBody = {
-                userId: user?._id,
                 username,
                 email,
                 ...(password && { password }),
                 profileImg: image
             };
 
-            updateUser(reqBody).then((res) => {
+            updateUser(user?._id, reqBody).then((res) => {
                 const response = res?.data?.data;
                 const { createdAt, updatedAt, __v, ...userPayload } = response;
 
                 if (res?.data?.status === 'success') {
                     showToast('success', res?.data?.message);
                     dispatch(updateAuthenticatedUser(userPayload));
+
+                    if (password) setPassword("");
                 }
                 else {
                     showToast('error', res?.data?.message);
@@ -96,7 +99,7 @@ const UserProfile = () => {
                                 <IoCheckmark />
                                 <span>Update Profile</span>
                             </Button>
-                            <Button className={styles.deleteUserProfileBtn}>
+                            <Button className={styles.deleteUserProfileBtn} onClick={() => setShowModal(true)}>
                                 <MdDelete />
                                 <span>Delete Profile</span>
                             </Button>
@@ -104,6 +107,8 @@ const UserProfile = () => {
                     </Row>
                 </Container>
             </section>
+
+            {showModal && <DeleteProfileModal show={showModal} onHide={setShowModal} />}
             <Footer />
         </>
     )

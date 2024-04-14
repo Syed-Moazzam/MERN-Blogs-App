@@ -54,7 +54,7 @@ const Home = () => {
                         <Row>
                             {blogs?.map((blog, index) => {
                                 return <Col lg={3} key={index}>
-                                    <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorEmail={blog?.authorEmail} blogDescription={blog?.story} />
+                                    <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorEmail={blog?.authorEmail} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
                                 </Col>
                             })}
                         </Row>

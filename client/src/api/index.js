@@ -19,12 +19,12 @@ export const getUser = async (userId) => {
     return axios.get(`/api/get-user/${userId}`);
 }
 
-export const updateUser = async (reqBody) => {
-    return axios.put(`/api/update-user`, reqBody);
+export const updateUser = async (userId, reqBody) => {
+    return axios.put(`/api/update-user/${userId}`, reqBody);
 }
 
-export const deleteUser = async () => {
-    return axios.delete(`/api/delete-user`);
+export const deleteUser = async (userId) => {
+    return axios.delete(`/api/delete-user/${userId}`);
 }
 
 // blog api`s

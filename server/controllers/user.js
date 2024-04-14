@@ -21,8 +21,9 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
+        const { userId } = req.params;
         const decodedUser = req.user;
-        if (req.body.userId === decodedUser?._id) {
+        if (userId === decodedUser?._id) {
             if (req.body.password) {
                 const encryptedPass = await bcrypt.hash(req.body.password, 10);
                 req.body.password = encryptedPass;
@@ -42,12 +43,13 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
+        const { userId } = req.params;
         const decodedUser = req.user;
-        if (req.body.userId === decodedUser?._id) {
+        if (userId === decodedUser?._id) {
             const isDeleted = await Blog.deleteMany({ authorEmail: decodedUser?.email });
             if (isDeleted) {
                 await User.findByIdAndDelete({ _id: decodedUser?._id });
-                res.send({ status: 'success', message: 'User deleted successfully!' });
+                res.clearCookie('access_token').send({ status: 'success', message: 'User Deleted Successfully!' });
             }
         }
         else {

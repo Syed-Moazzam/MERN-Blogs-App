@@ -31,12 +31,9 @@ const Signup = () => {
                 }
                 else {
                     showToast('error', res?.data?.message);
-                    setUsername("");
-                    setEmail("");
-                    setPassword("");
                 }
             }).catch((err) => {
-                showToast('error', err.message);
+                showToast('error', err?.message);
             }).finally(() => setLoading(false));
         }
     }

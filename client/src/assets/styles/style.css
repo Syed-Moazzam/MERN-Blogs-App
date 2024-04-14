@@ -128,6 +128,11 @@ body svg:hover {
     color: var(--black-color);
 }
 
+.modal-body {
+    padding: 24px 16px !important;
+    font-family: 'poppins-regular';
+}
+
 .css-10hburv-MuiTypography-root {
     font-family: 'poppins-regular' !important;
     font-size: 15.5px !important;
@@ -148,4 +153,12 @@ body svg:hover {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-hover-color);
+}
+
+
+/* media queries */
+@media screen and (min-width: 992px) {
+    .modal-dialog {
+        max-width: 600px !important;
+    }
 }

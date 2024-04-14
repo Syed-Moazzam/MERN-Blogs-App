@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
+const SingleBlog = lazy(() => import('./pages/SingleBlog'));
 const Contact = lazy(() => import('./pages/Contact'));
 const CreateBlog = lazy(() => import('./pages/CreateBlog'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
+          <Route path='/blog/:blogId' element={<SingleBlog />} />
           <Route path='/contact' element={<ProtectedRoute path={'/contact'} component={Contact} />} />
           <Route path='/create-blog' element={<ProtectedRoute path={'/create-blog'} component={CreateBlog} />} />
           <Route path='user-profile' element={<ProtectedRoute path={'user-profile'} component={UserProfile} />} />

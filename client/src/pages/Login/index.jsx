@@ -39,11 +39,9 @@ const Login = () => {
                 }
                 else {
                     showToast('error', res?.data?.message);
-                    setEmail("");
-                    setPassword("");
                 }
             }).catch((err) => {
-                showToast('error', err.message);
+                showToast('error', err?.message);
             }).finally(() => setLoading(false));
         }
     }
