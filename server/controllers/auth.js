@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body?.email });
         if (user) {
-            res.send({ status: 'error', message: "User Already Exists!" });
+            return res.send({ status: 'error', message: "User Already Exists!" });
         }
         else {
             const encryptedPass = await bcrypt.hash(req.body?.password, 10);
@@ -17,10 +17,10 @@ exports.signup = async (req, res) => {
             });
 
             const { password, ...userWithoutPwd } = newUser?._doc;
-            res.send({ status: 'success', data: userWithoutPwd });
+            return res.send({ status: 'success', data: userWithoutPwd });
         }
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body?.email });
         if (!user) {
-            res.send({ status: 'error', message: 'User Does Not Exist!' });
+            return res.send({ status: 'error', message: 'User Does Not Exist!' });
         }
         else {
             const password = await bcrypt.compare(req.body?.password, user?.password);
@@ -43,11 +43,11 @@ exports.login = async (req, res) => {
                 res.cookie('access_token', token, { httpOnly: false, secure: false, maxAge: 2700000 }).send({ status: 'success', message: 'Logged In Successfully!' });
             }
             else {
-                res.send({ status: 'error', message: 'Incorrect Password!' });
+                return res.send({ status: 'error', message: 'Incorrect Password!' });
             }
         }
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -55,6 +55,6 @@ exports.logout = async (req, res) => {
     try {
         res.clearCookie('access_token').send({ status: 'success', message: 'Logged Out Successfully!' });
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }

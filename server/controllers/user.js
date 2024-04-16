@@ -9,13 +9,13 @@ exports.getUser = async (req, res) => {
         if (userId === decodedUser?._id) {
             const user = await User.findById({ _id: decodedUser?._id });
             const { password, ...userWithoutPwd } = user?._doc;
-            res.send({ status: 'success', data: userWithoutPwd });
+            return res.send({ status: 'success', data: userWithoutPwd });
         }
         else {
-            res.send({ status: 'error', message: "You Can Only Access Your Own Information!" });
+            return res.send({ status: 'error', message: "You Can Only Access Your Own Information!" });
         }
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -31,13 +31,13 @@ exports.updateUser = async (req, res) => {
 
             const updatedUser = await User.findByIdAndUpdate({ _id: decodedUser?._id }, { $set: req.body }, { new: true });
             const { password, ...userWithoutPwd } = updatedUser?._doc;
-            res.send({ status: 'success', message: "Data Updated Successfully!", data: userWithoutPwd });
+            return res.send({ status: 'success', message: "Data Updated Successfully!", data: userWithoutPwd });
         }
         else {
-            res.send({ status: 'error', message: "You Can Only Update Your Own Information!" });
+            return res.send({ status: 'error', message: "You Can Only Update Your Own Information!" });
         }
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }
 
@@ -53,9 +53,9 @@ exports.deleteUser = async (req, res) => {
             }
         }
         else {
-            res.send({ status: 'error', message: "You Can Only Delete Your Own Account!" });
+            return res.send({ status: 'error', message: "You Can Only Delete Your Own Account!" });
         }
     } catch (error) {
-        res.status(505).send({ status: 'error', message: error.message });
+        return res.status(505).send({ status: 'error', message: error.message });
     }
 }
