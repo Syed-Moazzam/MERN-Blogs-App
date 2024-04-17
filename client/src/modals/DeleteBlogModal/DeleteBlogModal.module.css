@@ -1,0 +1,13 @@
+.noBtnOfDeleteBlogModal {
+    width: 60px;
+    background-color: #b4bbc2;
+}
+
+.noBtnOfDeleteBlogModal:hover {
+    background-color: #999fa5;
+    border-color: #999fa5;
+}
+
+.yesBtnOfDeleteBlogModal {
+    width: 75px;
+}

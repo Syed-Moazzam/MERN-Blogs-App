@@ -6,13 +6,17 @@ import allImages from '../../constants/imagePath';
 import styles from './Home.module.css';
 import Button from '../../components/Button';
 import HeroSection from '../../components/HeroSection';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import BlogCard from '../../components/BlogCard';
 import { getAllBlogs } from '../../api';
 
 const Home = () => {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
+    const [searchParams] = useSearchParams();
+
+    let filteredBlogs = [];
+    const category = searchParams.get("category");
 
     const categories = [
         { label: 'All Categories', path: '/' },
@@ -25,11 +29,17 @@ const Home = () => {
 
     useEffect(() => {
         getAllBlogs().then((res) => {
-            setBlogs(res?.data?.data);
+            if (res?.data?.status === 'success') {
+                setBlogs(res?.data?.data);
+            }
         }).catch((err) => {
             console.log('err', err);
         })
     }, []);
+
+    if (category) {
+        filteredBlogs = blogs?.filter((blog) => blog?.category === category);
+    }
 
     return (
         <>
@@ -51,13 +61,17 @@ const Home = () => {
                     </Col>
 
                     <Col lg={10}>
-                        <Row>
-                            {blogs?.map((blog, index) => {
-                                return <Col lg={3} key={index}>
-                                    <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorEmail={blog?.authorEmail} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
-                                </Col>
+                        {filteredBlogs?.length || blogs?.length ? <Row>
+                            {(filteredBlogs?.length ? filteredBlogs : blogs)?.map((blog, index) => {
+                                return (
+                                    <Col lg={3} key={index}>
+                                        <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorName={blog?.authorName} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
+                                    </Col>
+                                )
                             })}
                         </Row>
+                            : <h3 className={styles.noBlogsFoundElement}>No Blogs Found!</h3>
+                        }
                     </Col>
                 </Row>
             </Container>

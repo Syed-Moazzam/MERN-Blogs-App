@@ -57,7 +57,7 @@
 
 .createAnAccountLink:hover {
     color: var(--secondary-color);
-    background-color: rgba(25, 118, 210, 0.04);
+    background-color: var(--light-blue-color);
 }
 
 .goToHomeLink {

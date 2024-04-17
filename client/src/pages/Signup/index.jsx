@@ -41,9 +41,9 @@ const Signup = () => {
         <div className={styles.signupPageMainContainer}>
             <div className={styles.signupBoxContainer}>
                 <img src={allImages?.loginSignupBoxImg} alt='' />
-                <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} />
-                <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address...'} />
-                <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password...'} />
+                <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} disabled={loading} />
+                <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address...'} disabled={loading} />
+                <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password...'} disabled={loading} />
                 <Button btnText={'Signup'} className={styles.signupBtn} loading={loading} onClick={handleSignup} />
                 <p className={styles.orKeywordStyling}>OR</p>
                 <Link to='/login' className={styles.alreadyHaveAccountLink}>Already Have An Account?</Link>

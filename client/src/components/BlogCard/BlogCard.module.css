@@ -16,5 +16,6 @@
 
 .blogCardImg {
     height: 180px;
+    border-radius: 0px;
     object-fit: cover;
 }

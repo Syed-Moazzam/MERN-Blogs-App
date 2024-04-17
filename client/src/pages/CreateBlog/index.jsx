@@ -7,7 +7,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import Button from '../../components/Button';
-import DropDown from '../../components/Dropdown';
+import DropDown from '../../components/DropDown';
 import UploadImage from '../../components/UploadImage';
 import styles from './CreateBlog.module.css';
 import validator from 'validator';

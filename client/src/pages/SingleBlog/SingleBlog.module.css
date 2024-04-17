@@ -1,14 +1,112 @@
 .singleBlogContainer {
-    margin: 2px 0px 100px;
+    margin: 2px auto 100px;
 }
 
 .blogImageContainer {
     width: 100%;
     height: 450px;
+    outline: transparent solid 2px;
+    outline-offset: 2px;
+    border: 1px solid var(--searchbar-border-color);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 7px;
 }
 
 .blogImageContainer>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.blogContentMainContainer {
+    margin-top: 35px;
+}
+
+.containerOfBlogTitleAndBtns {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    position: relative;
+}
+
+.blogTitle {
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.blogTitle>p {
+    color: #818589;
+    font-size: 17px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.editAndDeleteBtnContainer {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    gap: 16px;
+}
+
+.editBlogBtn {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.editBlogBtn svg {
+    color: var(--green-color) !important;
+    font-size: 24.5px;
+}
+
+.editBlogBtn:hover svg {
+    color: var(--green-hover-color) !important;
+}
+
+.deleteBlogBtn {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.deleteBlogBtn svg {
+    color: var(--red-color) !important;
+    font-size: 24.5px;
+}
+
+.deleteBlogBtn:hover svg {
+    color: var(--red-hover-color) !important;
+}
+
+.blogContent {
+    margin-top: 42px;
+}
+
+.blogAuthorContainer {
+    font-size: 19px;
+    letter-spacing: 0.5px;
+    font-family: 'poppins-semiBold';
+    margin-bottom: 12px;
+}
+
+.blogStoryContainer {
+    display: flex;
+}
+
+.emptySpanAtBlogStart {
+    display: inline-block;
+    width: 25px;
+}
+
+.blogStory {
+    text-align: justify;
+    color: #818589;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+
+.blogStory::first-letter {
+    font-size: 32px;
+    font-weight: bolder;
 }

@@ -44,6 +44,8 @@
 
 .updateUserProfileBtn:hover {
     outline: none !important;
+    border-color: var(--green-hover-color) !important;
+    background-color: var(--green-hover-color) !important;
 }
 
 .disabledUpdateBtn {
@@ -60,11 +62,6 @@
 .deleteUserProfileBtn svg {
     color: var(--white-color) !important;
     margin-right: 5px;
-}
-
-.updateUserProfileBtn:hover {
-    border-color: var(--green-hover-color) !important;
-    background-color: var(--green-hover-color) !important;
 }
 
 .deleteUserProfileBtn:hover {

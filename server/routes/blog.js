@@ -9,6 +9,6 @@ router.get('/get-single-blog/:blogId', getSingleBlog);
 router.get('/get-filtered-blogs', getFilteredBlogs);
 router.post('/create-blog', validateSession, createBlog);
 router.put('/update-blog/:blogId', validateSession, updateBlog);
-router.delete('/delete-blog/:blogId', validateSession, deleteBlog);
+router.delete('/delete-blog/:authorId/:blogId', validateSession, deleteBlog);
 
 module.exports = router;

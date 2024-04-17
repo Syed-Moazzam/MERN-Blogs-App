@@ -48,8 +48,8 @@ export const updateBlog = async (blogId, reqBody) => {
     return axios.put(`/api/update-blog/${blogId}`, reqBody);
 }
 
-export const deleteBlog = async (blogId) => {
-    return axios.delete(`/api/delete-blog/${blogId}`);
+export const deleteBlog = async (authorId, blogId) => {
+    return axios.delete(`/api/delete-blog/${authorId}/${blogId}`);
 }
 
 // api for uploading images to cloudinary

@@ -46,11 +46,11 @@ exports.deleteUser = async (req, res) => {
         const { userId } = req.params;
         const sessionUser = req.session.user;
         if (userId === sessionUser?.id) {
-            const isDeleted = await Blog.deleteMany({ authorEmail: sessionUser?.email });
+            const isDeleted = await Blog.deleteMany({ authorId: sessionUser?.id });
             if (isDeleted) {
                 await User.findByIdAndDelete({ _id: sessionUser?.id });
                 req.session.destroy();
-                return res.send({ status: 'success', message: 'User Deleted Successfully!' });
+                return res.send({ status: 'success', message: 'Account Deleted Successfully!' });
             }
         }
         else {
