@@ -25,13 +25,12 @@ const Signup = () => {
         else {
             setLoading(true);
             signupApi({ username, email, password }).then((res) => {
-                if (res?.data?.status === 'success') {
-                    showToast('success', 'Account Created Successfully!');
-                    navigate('/login');
-                }
-                else {
+                if (res?.data?.status !== 'success') {
                     showToast('error', res?.data?.message);
+                    return;
                 }
+                showToast('success', res?.data?.message);
+                navigate('/login');
             }).catch((err) => {
                 showToast('error', err?.message);
             }).finally(() => setLoading(false));

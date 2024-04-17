@@ -1,12 +1,14 @@
 import React from 'react';
-import { isCookieTokenValid } from '../../api';
 import { Navigate } from 'react-router-dom';
+import useSessionValidation from '../../utils/SessionValidator';
 
 const ProtectedRoute = ({ path, component: Component }) => {
-    if ((path === '/login' || path === '/signup') && isCookieTokenValid()) return <Navigate to={'/'} />
-    else if ((path === '/login' || path === '/signup') && !isCookieTokenValid()) return <Component />
-    else if ((path !== '/login' || path !== '/signup') && !isCookieTokenValid()) return <Navigate to={'/login'} />
-    else if ((path !== '/login' || path !== '/signup') && isCookieTokenValid()) return <Component />
+    const isSessionValid = useSessionValidation();
+
+    if (isSessionValid() && (path === '/login' || path === '/signup')) return <Navigate to={'/'} />
+    else if (!isSessionValid() && (path === '/login' || path === '/signup')) return <Component />
+    else if (!isSessionValid() && (path !== '/login' || path !== '/signup')) return <Navigate to={'/login'} />
+    else if (isSessionValid() && (path !== '/login' || path !== '/signup')) return <Component />
 }
 
 export default ProtectedRoute;

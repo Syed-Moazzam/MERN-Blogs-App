@@ -15,11 +15,13 @@ const LogoutModal = ({ show, onHide }) => {
     const handleLogout = () => {
         onHide(false);
         logoutApi().then((res) => {
-            if (res?.data?.status === 'success') {
-                showToast('success', res?.data?.message);
-                dispatch(logout());
-                navigate('/');
+            if (res?.data?.status !== 'success') {
+                showToast('error', res?.data?.message);
+                return;
             }
+            showToast('success', res?.data?.message);
+            dispatch(logout());
+            navigate('/');
         }).catch((err) => {
             showToast('error', err?.message);
         });

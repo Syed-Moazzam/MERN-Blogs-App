@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 // auth api`s
 export const signupApi = async (reqBody) => {
@@ -36,6 +35,11 @@ export const getSingleBlog = async (blogId) => {
     return axios.get(`/api/get-single-blog/${blogId}`);
 }
 
+export const getFilteredBlogs = (blogTitle, categoryName) => {
+    if (blogTitle) return axios.get(`/api/get-filtered-blogs?blogTitle=${blogTitle}`);
+    else return axios.get(`/api/get-filtered-blogs?category=${categoryName}`);
+}
+
 export const createBlog = async (reqBody) => {
     return axios.post(`/api/create-blog`, reqBody);
 }
@@ -56,11 +60,4 @@ export const uploadImageToCloudinary = async (formData) => {
 // api for sending emails through nodemailer
 export const sendEmail = async (reqBody) => {
     return axios.post(`/api/send-email`, reqBody);
-}
-
-// for checking token validity
-export const isCookieTokenValid = () => {
-    const token = Cookies.get(`access_token`);
-    if (token) return true;
-    else return false;
 }

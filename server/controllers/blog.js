@@ -2,10 +2,10 @@ const Blog = require('../models/Blog');
 
 exports.createBlog = async (req, res) => {
     try {
-        const decodedUser = req.user;
+        const sessionUser = req.session.user;
         await Blog.create({
-            authorId: decodedUser?._id,
-            authorEmail: decodedUser?.email,
+            authorId: sessionUser?.id,
+            authorEmail: sessionUser?.email,
             title: req.body?.title,
             category: req.body?.category,
             story: req.body?.story,
@@ -20,14 +20,7 @@ exports.createBlog = async (req, res) => {
 
 exports.getAllBlogs = async (req, res) => {
     try {
-        let blogs = null;
-        const { category } = req.query;
-        if (category) {
-            blogs = await Blog.find({ category });
-        }
-        else {
-            blogs = await Blog.find();
-        }
+        const blogs = await Blog.find();
         return res.send({ status: 'success', data: blogs });
     } catch (error) {
         return res.status(505).send({ status: 'error', message: error.message });
@@ -44,11 +37,26 @@ exports.getSingleBlog = async (req, res) => {
     }
 }
 
+exports.getFilteredBlogs = async (req, res) => {
+    try {
+        const { blogTitle, category } = req.query;
+        let data = null;
+        if (blogTitle) {
+            data = await Blog.findOne({ title: blogTitle });
+        }
+        else data = await Blog.find({ category });
+
+        return res.send({ status: 'success', data });
+    } catch (error) {
+        return res.status(505).send({ status: 'error', message: error?.message });
+    }
+}
+
 exports.updateBlog = async (req, res) => {
     try {
-        const decodedUser = req.user;
-        if (req.body.userId === decodedUser?._id) {
-            const { blogId } = req.params;
+        const sessionUser = req.session.user;
+        const { blogId } = req.params;
+        if (req.body.userId === sessionUser?.id) {
             const updatedBlog = await Blog.findByIdAndUpdate({ _id: blogId }, { $set: req.body }, { new: true });
             return res.send({ status: 'success', data: updatedBlog });
         }
@@ -63,11 +71,11 @@ exports.updateBlog = async (req, res) => {
 
 exports.deleteBlog = async (req, res) => {
     try {
-        const decodedUser = req.user;
-        if (req.body.userId === decodedUser?._id) {
-            const { blogId } = req.params;
-            const deletedBlog = await Blog.findByIdAndDelete({ _id: blogId }, { new: true });
-            return res.send({ status: 'success', data: deletedBlog });
+        const sessionUser = req.session.user;
+        const { blogId } = req.params;
+        if (req.body.userId === sessionUser?.id) {
+            await Blog.findByIdAndDelete({ _id: blogId }, { new: true });
+            return res.send({ status: 'success', message: 'Blog Deleted Successfully!' });
         }
         else {
             return res.send({ status: 'error', message: 'You Can Only Delete Your Own Blogs!' });

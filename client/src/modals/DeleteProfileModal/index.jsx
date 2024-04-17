@@ -16,15 +16,14 @@ const DeleteProfileModal = ({ show, onHide }) => {
 
     const handleProfileDeletion = () => {
         onHide(false);
-        deleteUser(user?._id).then((res) => {
-            if (res?.data?.status === 'success') {
-                showToast('success', res?.data?.message);
-                dispatch(deleteAuthenticatedUser());
-                navigate('/');
-            }
-            else {
+        deleteUser(user?.id).then((res) => {
+            if (res?.data?.status !== 'success') {
                 showToast('error', res?.data?.message);
+                return;
             }
+            showToast('success', res?.data?.message);
+            dispatch(deleteAuthenticatedUser());
+            navigate('/');
         }).catch((err) => {
             showToast('error', err?.message);
         });

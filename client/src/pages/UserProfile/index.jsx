@@ -57,19 +57,18 @@ const UserProfile = () => {
                 profileImg: image
             };
 
-            updateUser(user?._id, reqBody).then((res) => {
+            updateUser(user?.id, reqBody).then((res) => {
                 const response = res?.data?.data;
-                const { createdAt, updatedAt, __v, ...userPayload } = response;
+                let { createdAt, updatedAt, __v, ...userPayload } = response;
 
-                if (res?.data?.status === 'success') {
-                    showToast('success', res?.data?.message);
-                    dispatch(updateAuthenticatedUser(userPayload));
-
-                    if (password) setPassword("");
-                }
-                else {
+                if (res?.data?.status !== 'success') {
                     showToast('error', res?.data?.message);
+                    return;
                 }
+                showToast('success', res?.data?.message);
+                userPayload = { ...userPayload, sessionExpirationTime: user?.sessionExpirationTime };
+                dispatch(updateAuthenticatedUser(userPayload));
+                if (password) setPassword("");
             }).catch((err) => {
                 showToast('error', err?.message);
             }).finally(() => setLoading(false));

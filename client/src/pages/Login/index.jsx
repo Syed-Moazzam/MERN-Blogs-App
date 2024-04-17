@@ -9,8 +9,6 @@ import validator from 'validator';
 import { loginApi } from '../../api';
 import showToast from '../../utils/Toast';
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/user/userSlice';
 
@@ -29,17 +27,14 @@ const Login = () => {
         else {
             setLoading(true);
             loginApi({ email, password }).then((res) => {
-                if (res?.data?.status === 'success') {
-                    showToast('success', res?.data?.message);
-                    navigate('/');
-                    const accessToken = Cookies.get('access_token');
-                    const decodedToken = jwtDecode(accessToken);
-                    const { iat, ...user } = decodedToken;
-                    dispatch(login(user));
-                }
-                else {
+                if (res?.data?.status !== 'success') {
                     showToast('error', res?.data?.message);
+                    return;
                 }
+                showToast('success', res?.data?.message);
+                navigate('/');
+                const user = res?.data?.data;
+                dispatch(login(user));
             }).catch((err) => {
                 showToast('error', err?.message);
             }).finally(() => setLoading(false));

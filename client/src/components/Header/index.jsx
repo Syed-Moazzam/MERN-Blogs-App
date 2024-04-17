@@ -11,9 +11,9 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import Avatar from '../Avatar';
-import { isCookieTokenValid } from '../../api';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import LogoutModal from '../../modals/LogoutModal';
+import useSessionValidation from '../../utils/SessionValidator';
 
 const Header = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -21,6 +21,8 @@ const Header = () => {
     const [showModal, setShowModal] = useState(false);
 
     const user = useSelector((state) => state?.user);
+
+    const isSessionValid = useSessionValidation();
 
     const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const Header = () => {
         { icon: FaHeadphonesSimple, name: 'Contact', navigateTo: '/contact' },
         { icon: IoMdAddCircle, name: 'Create Blog', navigateTo: '/create-blog' },
         { icon: FaUserCircle, name: 'Profile', navigateTo: '/user-profile' },
-        !isCookieTokenValid() ? { icon: MdOutlineLogin, name: 'Login', navigateTo: '/login' } : { icon: MdOutlineLogout, name: 'Logout' }
+        !isSessionValid() ? { icon: MdOutlineLogin, name: 'Login', navigateTo: '/login' } : { icon: MdOutlineLogout, name: 'Logout' }
     ];
 
     return (
@@ -46,7 +48,7 @@ const Header = () => {
             <div className={styles.headerMainContainerDiv}>
                 <Button className={styles.hamburgerIconOfHeader} onClick={toggleDrawer}><GiHamburgerMenu /></Button>
                 <SearchBar value={searchInput} setter={setSearchInput} type={'text'} placeholder={'Search Blogs By Title Or Category...'} searchBtnText={'Search'} className={styles.searchbarOfHeader} />
-                {isCookieTokenValid() && <Avatar img={user?.profileImg} className={styles.userAvatarOfHeader} onClick={() => navigate('/user-profile')} />}
+                {isSessionValid() && <Avatar img={user?.profileImg} className={styles.userAvatarOfHeader} onClick={() => navigate('/user-profile')} />}
             </div>
 
             <CustomDrawer openDrawer={openDrawer} toggleDrawer={toggleDrawer} drawerTitle={'StoryStreamline'} drawerItems={drawerItems} />

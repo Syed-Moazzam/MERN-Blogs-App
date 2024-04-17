@@ -25,10 +25,19 @@ const Contact = () => {
         else {
             setLoading(true);
             sendEmail({ username, email, message }).then((res) => {
-                console.log('res', res);
+                if (res?.data?.status !== 'success') {
+                    showToast('error', res?.data?.message);
+                    return;
+                }
+                showToast('success', res?.data?.message);
             }).catch((err) => {
-                console.log('error', err);
-            }).finally(() => setLoading(false));
+                showToast('error', err?.message);
+            }).finally(() => {
+                setLoading(false);
+                setUsername("");
+                setEmail("");
+                setMessage("");
+            });
         }
     }
 

@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const { updateUser, getUser, deleteUser } = require('../controllers/user');
-const authenticateToken = require('../middlewares/authenticateToken');
+const validateSession = require('../middlewares/validateSession');
 
-router.get('/get-user/:userId', authenticateToken, getUser);
-router.put('/update-user/:userId', authenticateToken, updateUser);
-router.delete('/delete-user/:userId', authenticateToken, deleteUser);
+router.get('/get-user/:userId', validateSession, getUser);
+router.put('/update-user/:userId', validateSession, updateUser);
+router.delete('/delete-user/:userId', validateSession, deleteUser);
 
 module.exports = router;

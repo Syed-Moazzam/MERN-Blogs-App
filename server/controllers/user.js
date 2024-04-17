@@ -5,9 +5,9 @@ const bcrypt = require('bcryptjs');
 exports.getUser = async (req, res) => {
     try {
         const { userId } = req.params;
-        const decodedUser = req.user;
-        if (userId === decodedUser?._id) {
-            const user = await User.findById({ _id: decodedUser?._id });
+        const sessionUser = req.session.user;
+        if (userId === sessionUser?.id) {
+            const user = await User.findById({ _id: sessionUser?.id });
             const { password, ...userWithoutPwd } = user?._doc;
             return res.send({ status: 'success', data: userWithoutPwd });
         }
@@ -22,14 +22,14 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const { userId } = req.params;
-        const decodedUser = req.user;
-        if (userId === decodedUser?._id) {
+        const sessionUser = req.session.user;
+        if (userId === sessionUser?.id) {
             if (req.body.password) {
                 const encryptedPass = await bcrypt.hash(req.body.password, 10);
                 req.body.password = encryptedPass;
             }
 
-            const updatedUser = await User.findByIdAndUpdate({ _id: decodedUser?._id }, { $set: req.body }, { new: true });
+            const updatedUser = await User.findByIdAndUpdate({ _id: sessionUser?.id }, { $set: req.body }, { new: true });
             const { password, ...userWithoutPwd } = updatedUser?._doc;
             return res.send({ status: 'success', message: "Data Updated Successfully!", data: userWithoutPwd });
         }
@@ -44,12 +44,13 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         const { userId } = req.params;
-        const decodedUser = req.user;
-        if (userId === decodedUser?._id) {
-            const isDeleted = await Blog.deleteMany({ authorEmail: decodedUser?.email });
+        const sessionUser = req.session.user;
+        if (userId === sessionUser?.id) {
+            const isDeleted = await Blog.deleteMany({ authorEmail: sessionUser?.email });
             if (isDeleted) {
-                await User.findByIdAndDelete({ _id: decodedUser?._id });
-                res.clearCookie('access_token').send({ status: 'success', message: 'User Deleted Successfully!' });
+                await User.findByIdAndDelete({ _id: sessionUser?.id });
+                req.session.destroy();
+                return res.send({ status: 'success', message: 'User Deleted Successfully!' });
             }
         }
         else {

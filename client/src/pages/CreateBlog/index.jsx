@@ -57,10 +57,12 @@ const CreateBlog = () => {
                     blogImg: img
                 }
                 createBlog(reqBody).then((res) => {
-                    if (res?.data?.status === 'success') {
-                        showToast('success', res?.data?.message);
-                        navigate('/');
+                    if (res?.data?.status !== 'success') {
+                        showToast('error', res?.data?.message);
+                        return;
                     }
+                    showToast('success', res?.data?.message);
+                    navigate('/');
                 }).catch((err) => {
                     showToast('error', err?.message);
                     setBlogTitle("");
