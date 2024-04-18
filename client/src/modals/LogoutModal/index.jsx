@@ -15,11 +15,11 @@ const LogoutModal = ({ show, onHide }) => {
     const handleLogout = () => {
         onHide(false);
         logoutApi().then((res) => {
-            if (res?.data?.status !== 'success') {
+            if (res?.data?.status !== 'success' && res?.data?.message !== 'Unauthorized User! Please Login Again') {
                 showToast('error', res?.data?.message);
                 return;
             }
-            showToast('success', res?.data?.message);
+            showToast('success', 'Logged Out Successfully!');
             dispatch(logout());
             navigate('/');
         }).catch((err) => {

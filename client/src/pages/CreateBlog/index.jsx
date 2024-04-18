@@ -21,6 +21,7 @@ const CreateBlog = () => {
     const [blogCategory, setBlogCategory] = useState('');
     const [blogImage, setBlogImage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [previewImg, setPreviewImg] = useState("");
 
     const navigate = useNavigate();
 
@@ -69,6 +70,7 @@ const CreateBlog = () => {
                     setBlogCategory("");
                     setBlogStory("");
                     setBlogImage("");
+                    setPreviewImg("");
                 });
             }).catch((error) => {
                 console.log('image could not be uploaded due to', error);
@@ -85,7 +87,7 @@ const CreateBlog = () => {
                     <Row className={styles.rowOfCreateBlogPage}>
                         <Col lg={4}>
                             <div className={styles.uploadImageDiv}>
-                                <UploadImage value={blogImage} setter={setBlogImage} disabled={loading} />
+                                <UploadImage value={blogImage} setter={setBlogImage} previewImg={previewImg} setPreviewImg={setPreviewImg} disabled={loading} />
                             </div>
                         </Col>
                         <Col lg={8}>

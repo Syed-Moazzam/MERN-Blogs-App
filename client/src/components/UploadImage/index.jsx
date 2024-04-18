@@ -1,13 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styles from './UploadImage.module.css';
 import { FiUpload } from 'react-icons/fi';
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from '../Button';
 
-const UploadImage = ({ value, setter, className, disabled, user }) => {
+const UploadImage = ({ value, setter, previewImg, setPreviewImg, className, disabled, user }) => {
     const imgRef = useRef(null);
-    const [previewImg, setPreviewImg] = useState('');
 
     const handleImagePreview = async (e) => {
         const file = e.target.files[0];
@@ -31,9 +30,9 @@ const UploadImage = ({ value, setter, className, disabled, user }) => {
     }
 
     return (
-        <div className={styles.uploadImageContainer}>
-            <input type="file" accept='image/*' ref={imgRef} onChange={handleImagePreview} disabled={disabled} />
-            {(!previewImg && !value) && <Button className={[className && className, styles.uploadImgOverlay].join(' ')} onClick={() => imgRef.current.click()}>
+        <div className={[styles.uploadImageContainer, disabled && styles.disabledUploadImageContainer].join(' ')}>
+            <input type="file" accept='image/*' ref={imgRef} onChange={handleImagePreview} />
+            {!previewImg && !value && <Button className={[className && className, styles.uploadImgOverlay].join(' ')} onClick={() => imgRef.current.click()}>
                 <span><FiUpload className={styles.uploadImgIcon} /></span>
                 <span>Upload Image</span>
             </Button>}

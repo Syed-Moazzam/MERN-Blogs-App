@@ -20,6 +20,7 @@ const UserProfile = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userImage, setUserImage] = useState("");
+    const [previewImg, setPreviewImg] = useState("");
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -40,7 +41,7 @@ const UserProfile = () => {
         }
         else {
             setLoading(true);
-            let image = "";
+            let image = null;
             if (userImage && userImage !== user?.profileImg) {
                 const formData = new FormData();
                 formData.append('file', userImage);
@@ -49,15 +50,21 @@ const UserProfile = () => {
                 const response = await uploadImageToCloudinary(formData);
                 image = response?.data?.secure_url;
             }
+            else if (userImage && userImage === user?.profileImg) {
+                image = userImage;
+            }
+            else {
+                image = "";
+            }
 
             const reqBody = {
+                profileImg: image,
                 username,
                 email,
                 ...(password && { password }),
-                profileImg: image
             };
 
-            updateUser(user?.id, reqBody).then((res) => {
+            updateUser(user?._id, reqBody).then((res) => {
                 const response = res?.data?.data;
                 let { createdAt, updatedAt, __v, ...userPayload } = response;
 
@@ -80,29 +87,31 @@ const UserProfile = () => {
             <Header />
             <section className={styles.userProfileContainer}>
                 <Container>
-                    <Row className={styles.rowOfUserProfileSection}>
-                        <Col lg={12} className={styles.containerOfUserProfileImg}>
-                            <UploadImage value={userImage} setter={setUserImage} className={styles.uploadImgComponentForUserProfile} user={user} />
-                        </Col>
-                        <Col lg={12}>
-                            <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} />
-                        </Col>
-                        <Col lg={12}>
-                            <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address...'} />
-                        </Col>
-                        <Col lg={12}>
-                            <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password...'} />
-                        </Col>
-                        <Col lg={12} className={styles.containerOfUpdateAndDeleteProfile}>
-                            <Button className={[(user?.username === username && user?.email === email && user?.profileImg === userImage && !password) && styles.disabledUpdateBtn, styles.updateUserProfileBtn].join(' ')} onClick={updateUserProfile} loading={loading}>
-                                <IoCheckmark />
-                                <span>Update Profile</span>
-                            </Button>
-                            <Button className={styles.deleteUserProfileBtn} onClick={() => setShowModal(true)}>
-                                <MdDelete />
-                                <span>Delete Profile</span>
-                            </Button>
-                        </Col>
+                    <Row>
+                        <div className={styles.rowOfUserProfileSection}>
+                            <Col lg={12} className={styles.containerOfUserProfileImg}>
+                                <UploadImage value={userImage} setter={setUserImage} previewImg={previewImg} setPreviewImg={setPreviewImg} className={styles.uploadImgComponentForUserProfile} user={user} disabled={loading} />
+                            </Col>
+                            <Col lg={12}>
+                                <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} disabled={loading} />
+                            </Col>
+                            <Col lg={12}>
+                                <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address...'} disabled={loading} />
+                            </Col>
+                            <Col lg={12}>
+                                <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password...'} disabled={loading} />
+                            </Col>
+                            <Col lg={12} className={styles.containerOfUpdateAndDeleteProfile}>
+                                <Button className={[(user?.username === username && user?.email === email && user?.profileImg === userImage && !password) && styles.disabledUpdateBtn, styles.updateUserProfileBtn].join(' ')} onClick={updateUserProfile} loading={loading}>
+                                    <IoCheckmark />
+                                    <span>Update Profile</span>
+                                </Button>
+                                <Button className={styles.deleteUserProfileBtn} onClick={() => setShowModal(true)}>
+                                    <MdDelete />
+                                    <span>Delete Profile</span>
+                                </Button>
+                            </Col>
+                        </div>
                     </Row>
                 </Container>
             </section>

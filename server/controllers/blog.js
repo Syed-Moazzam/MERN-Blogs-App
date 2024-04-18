@@ -4,7 +4,7 @@ exports.createBlog = async (req, res) => {
     try {
         const sessionUser = req.session.user;
         await Blog.create({
-            authorId: sessionUser?.id,
+            authorId: sessionUser?._id,
             authorName: sessionUser?.username,
             title: req.body?.title,
             category: req.body?.category,
@@ -56,7 +56,7 @@ exports.updateBlog = async (req, res) => {
     try {
         const sessionUser = req.session.user;
         const { blogId } = req.params;
-        if (req.body.userId === sessionUser?.id) {
+        if (req.body.userId === sessionUser?._id) {
             const updatedBlog = await Blog.findByIdAndUpdate({ _id: blogId }, { $set: req.body }, { new: true });
             return res.send({ status: 'success', data: updatedBlog });
         }
@@ -73,7 +73,7 @@ exports.deleteBlog = async (req, res) => {
     try {
         const sessionUser = req.session.user;
         const { authorId, blogId } = req.params;
-        if (authorId === sessionUser?.id) {
+        if (authorId === sessionUser?._id) {
             await Blog.findByIdAndDelete({ _id: blogId }, { new: true });
             return res.send({ status: 'success', message: 'Blog Deleted Successfully!' });
         }

@@ -4,7 +4,6 @@ const { Schema } = mongoose;
 const blogSchema = new Schema({
     authorId: {
         type: String,
-        unique: true,
         required: true,
     },
     authorName: {

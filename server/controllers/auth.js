@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
             const password = await bcrypt.compare(req.body?.password, user?.password);
             if (password) {
                 const sessionUser = {
-                    id: user?._id,
+                    _id: user?._id,
                     profileImg: user?.profileImg,
                     username: user?.username,
                     email: user?.email,

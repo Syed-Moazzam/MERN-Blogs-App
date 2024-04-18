@@ -17,6 +17,6 @@
 }
 
 .loaderForButton {
-    width: auto;
-    height: auto;
+    width: auto !important;
+    height: auto !important;
 }

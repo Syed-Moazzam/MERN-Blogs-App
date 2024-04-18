@@ -6,8 +6,8 @@ exports.getUser = async (req, res) => {
     try {
         const { userId } = req.params;
         const sessionUser = req.session.user;
-        if (userId === sessionUser?.id) {
-            const user = await User.findById({ _id: sessionUser?.id });
+        if (userId === sessionUser?._id) {
+            const user = await User.findById({ _id: sessionUser?._id });
             const { password, ...userWithoutPwd } = user?._doc;
             return res.send({ status: 'success', data: userWithoutPwd });
         }
@@ -23,13 +23,13 @@ exports.updateUser = async (req, res) => {
     try {
         const { userId } = req.params;
         const sessionUser = req.session.user;
-        if (userId === sessionUser?.id) {
+        if (userId === sessionUser?._id) {
             if (req.body.password) {
                 const encryptedPass = await bcrypt.hash(req.body.password, 10);
                 req.body.password = encryptedPass;
             }
 
-            const updatedUser = await User.findByIdAndUpdate({ _id: sessionUser?.id }, { $set: req.body }, { new: true });
+            const updatedUser = await User.findByIdAndUpdate({ _id: sessionUser?._id }, { $set: req.body }, { new: true });
             const { password, ...userWithoutPwd } = updatedUser?._doc;
             return res.send({ status: 'success', message: "Data Updated Successfully!", data: userWithoutPwd });
         }
@@ -45,10 +45,10 @@ exports.deleteUser = async (req, res) => {
     try {
         const { userId } = req.params;
         const sessionUser = req.session.user;
-        if (userId === sessionUser?.id) {
-            const isDeleted = await Blog.deleteMany({ authorId: sessionUser?.id });
+        if (userId === sessionUser?._id) {
+            const isDeleted = await Blog.deleteMany({ authorId: sessionUser?._id });
             if (isDeleted) {
-                await User.findByIdAndDelete({ _id: sessionUser?.id });
+                await User.findByIdAndDelete({ _id: sessionUser?._id });
                 req.session.destroy();
                 return res.send({ status: 'success', message: 'Account Deleted Successfully!' });
             }

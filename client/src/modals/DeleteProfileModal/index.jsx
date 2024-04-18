@@ -16,7 +16,7 @@ const DeleteProfileModal = ({ show, onHide }) => {
 
     const handleProfileDeletion = () => {
         onHide(false);
-        deleteUser(user?.id).then((res) => {
+        deleteUser(user?._id).then((res) => {
             if (res?.data?.status !== 'success') {
                 showToast('error', res?.data?.message);
                 return;

@@ -1,6 +1,6 @@
 .rowOfUserProfileSection {
-    width: 50%;
-    margin: 130px auto;
+    width: 50% !important;
+    margin: 130px auto !important;
 }
 
 .rowOfUserProfileSection>div {
@@ -26,7 +26,7 @@
 }
 
 .containerOfUpdateAndDeleteProfile {
-    margin-top: 32px;
+    margin-top: 35px;
     align-items: center;
     gap: 20px;
 }

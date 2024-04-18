@@ -9,11 +9,13 @@ import HeroSection from '../../components/HeroSection';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import BlogCard from '../../components/BlogCard';
 import { getAllBlogs } from '../../api';
+import Loader from '../../components/Loader';
 
 const Home = () => {
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
     const [searchParams] = useSearchParams();
+    const [loading, setLoading] = useState(true);
 
     let filteredBlogs = [];
     const category = searchParams.get("category");
@@ -34,7 +36,7 @@ const Home = () => {
             }
         }).catch((err) => {
             console.log('err', err);
-        })
+        }).finally(() => setLoading(false));
     }, []);
 
     if (category) {
@@ -43,39 +45,43 @@ const Home = () => {
 
     return (
         <>
-            <Header />
-            <HeroSection img={allImages?.mainBgImg} />
-            <Container fluid className={styles.blogsCategoryContainer}>
-                <Row>
-                    <Col lg={2}>
-                        <Button btnText={'CREATE BLOG'} className={styles.createBlogButtonOfHome} onClick={() => navigate('/create-blog')} />
-                        <div className={styles.categoriesMainContainer}>
-                            {categories?.map((category, key) => {
-                                return (
-                                    <div className={styles.eachCategoryContainer} key={key}>
-                                        <Link to={category?.path}>{category?.label}</Link>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </Col>
+            {loading ? <Loader customStyles={{ width: '60px', height: '60px', borderWidth: '6px' }} /> :
+                <>
+                    <Header />
+                    <HeroSection img={allImages?.mainBgImg} />
+                    <Container fluid className={styles.blogsCategoryContainer}>
+                        <Row>
+                            <Col lg={2}>
+                                <Button btnText={'CREATE BLOG'} className={styles.createBlogButtonOfHome} onClick={() => navigate('/create-blog')} />
+                                <div className={styles.categoriesMainContainer}>
+                                    {categories?.map((category, key) => {
+                                        return (
+                                            <div className={styles.eachCategoryContainer} key={key}>
+                                                <Link to={category?.path}>{category?.label}</Link>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </Col>
 
-                    <Col lg={10}>
-                        {filteredBlogs?.length || blogs?.length ? <Row>
-                            {(filteredBlogs?.length ? filteredBlogs : blogs)?.map((blog, index) => {
-                                return (
-                                    <Col lg={3} key={index}>
-                                        <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorName={blog?.authorName} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
-                                    </Col>
-                                )
-                            })}
+                            <Col lg={10}>
+                                {filteredBlogs?.length || blogs?.length ? <Row>
+                                    {(filteredBlogs?.length ? filteredBlogs : blogs)?.map((blog, index) => {
+                                        return (
+                                            <Col lg={3} key={index}>
+                                                <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorName={blog?.authorName} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
+                                            </Col>
+                                        )
+                                    })}
+                                </Row>
+                                    : <h3 className={styles.noBlogsFoundElement}>No Blogs Found!</h3>
+                                }
+                            </Col>
                         </Row>
-                            : <h3 className={styles.noBlogsFoundElement}>No Blogs Found!</h3>
-                        }
-                    </Col>
-                </Row>
-            </Container>
-            <Footer />
+                    </Container>
+                    <Footer />
+                </>
+            }
         </>
     )
 }
