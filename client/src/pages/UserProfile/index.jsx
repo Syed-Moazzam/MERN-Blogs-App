@@ -90,7 +90,7 @@ const UserProfile = () => {
                     <Row>
                         <div className={styles.rowOfUserProfileSection}>
                             <Col lg={12} className={styles.containerOfUserProfileImg}>
-                                <UploadImage value={userImage} setter={setUserImage} previewImg={previewImg} setPreviewImg={setPreviewImg} className={styles.uploadImgComponentForUserProfile} user={user} disabled={loading} />
+                                <UploadImage value={userImage} setter={setUserImage} previewImg={previewImg} setPreviewImg={setPreviewImg} className={styles.uploadImgComponentForUserProfile} disabled={loading} imgStyles={{ width: '250px', height: '250px' }} />
                             </Col>
                             <Col lg={12}>
                                 <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} disabled={loading} />

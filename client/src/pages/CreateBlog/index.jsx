@@ -43,7 +43,7 @@ const CreateBlog = () => {
         else {
             const formData = new FormData();
             formData.append('file', blogImage);
-            formData.append('upload_preset', `${import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET}`);
+            formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
 
             // Uploading image to Cloudinary
             setLoading(true);

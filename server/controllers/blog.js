@@ -56,9 +56,9 @@ exports.updateBlog = async (req, res) => {
     try {
         const sessionUser = req.session.user;
         const { blogId } = req.params;
-        if (req.body.userId === sessionUser?._id) {
+        if (req.body.authorId === sessionUser?._id) {
             const updatedBlog = await Blog.findByIdAndUpdate({ _id: blogId }, { $set: req.body }, { new: true });
-            return res.send({ status: 'success', data: updatedBlog });
+            return res.send({ status: 'success', message: 'Blog Updated Successfully!', data: updatedBlog });
         }
         else {
             return res.send({ status: 'error', message: "You Can Only Update Your Own Blogs!" });

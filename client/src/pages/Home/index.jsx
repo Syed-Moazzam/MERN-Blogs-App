@@ -4,7 +4,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import allImages from '../../constants/imagePath';
 import styles from './Home.module.css';
-import Button from '../../components/Button';
 import HeroSection from '../../components/HeroSection';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import BlogCard from '../../components/BlogCard';
@@ -52,7 +51,7 @@ const Home = () => {
                     <Container fluid className={styles.blogsCategoryContainer}>
                         <Row>
                             <Col lg={2}>
-                                <Button btnText={'CREATE BLOG'} className={styles.createBlogButtonOfHome} onClick={() => navigate('/create-blog')} />
+                                <Link to={'/create-blog'} className={styles.createBlogLinkOfHome}>CREATE BLOG</Link>
                                 <div className={styles.categoriesMainContainer}>
                                     {categories?.map((category, key) => {
                                         return (

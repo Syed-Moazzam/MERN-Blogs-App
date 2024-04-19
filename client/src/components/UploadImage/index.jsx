@@ -5,7 +5,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import Button from '../Button';
 
-const UploadImage = ({ value, setter, previewImg, setPreviewImg, className, disabled, user }) => {
+const UploadImage = ({ value, setter, previewImg, setPreviewImg, className, disabled, imgStyles }) => {
     const imgRef = useRef(null);
 
     const handleImagePreview = async (e) => {
@@ -44,7 +44,7 @@ const UploadImage = ({ value, setter, previewImg, setPreviewImg, className, disa
                         <Button onClick={handleImageDelete}><MdDelete /></Button>
                     </div>
 
-                    <img src={typeof value === 'string' ? value : previewImg} alt="" className={[styles.previewImage, user && styles.userPreviewImage].join(' ')} />
+                    <img src={(value && typeof value === 'string') ? value : previewImg} alt="" className={styles.previewImage} style={{ ...imgStyles }} />
                 </>
             }
         </div>

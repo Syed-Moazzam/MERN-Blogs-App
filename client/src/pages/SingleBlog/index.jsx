@@ -8,6 +8,7 @@ import { getSingleBlog } from '../../api';
 import Button from '../../components/Button';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import DeleteBlogModal from '../../modals/DeleteBlogModal';
+import EditBlogModal from '../../modals/EditBlogModal';
 import showToast from '../../utils/Toast';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
@@ -15,19 +16,20 @@ import Loader from '../../components/Loader';
 const SingleBlog = () => {
     const { blogId } = useParams();
     const [blog, setBlog] = useState({});
-    const [showModal, setShowModal] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [deleteBlogModal, setDeleteBlogModal] = useState(false);
+    const [editBlogModal, setEditBlogModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const user = useSelector((state) => state?.user);
 
     useEffect(() => {
+        setLoading(true);
         getSingleBlog(blogId).then((res) => {
             setBlog(res?.data?.data);
         }).catch((err) => {
             showToast('error', err?.message);
         }).finally(() => setLoading(false));
-    }, []);
-
+    }, [editBlogModal]);
 
     return (
         <>
@@ -48,8 +50,8 @@ const SingleBlog = () => {
                                                 <p>{blog?.category}</p>
                                             </div>
                                             {user && user?._id === blog?.authorId && <div className={styles.editAndDeleteBtnContainer}>
-                                                <Button className={styles.editBlogBtn}><MdEdit /></Button>
-                                                <Button className={styles.deleteBlogBtn} onClick={() => setShowModal(true)}><MdDelete /></Button>
+                                                <Button className={styles.editBlogBtn} onClick={() => setEditBlogModal(true)}><MdEdit /></Button>
+                                                <Button className={styles.deleteBlogBtn} onClick={() => setDeleteBlogModal(true)}><MdDelete /></Button>
                                             </div>}
                                         </div>
 
@@ -71,7 +73,9 @@ const SingleBlog = () => {
                     <Footer />
                 </>
             }
-            {showModal && <DeleteBlogModal show={showModal} onHide={setShowModal} authorId={blog?.authorId} blogId={blogId} />}
+
+            {editBlogModal && <EditBlogModal show={editBlogModal} onHide={setEditBlogModal} existingBlog={blog} />}
+            {deleteBlogModal && <DeleteBlogModal show={deleteBlogModal} onHide={setDeleteBlogModal} authorId={blog?.authorId} blogId={blogId} />}
         </>
     )
 }
