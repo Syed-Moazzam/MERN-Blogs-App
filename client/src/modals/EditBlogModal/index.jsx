@@ -9,7 +9,7 @@ import Input from '../../components/Input';
 import DropDown from '../../components/DropDown';
 import TextArea from '../../components/TextArea';
 
-const EditBlogModal = ({ show, onHide, existingBlog }) => {
+const EditBlogModal = ({ show, onHide, existingBlog, setIsBlogUpdated }) => {
     const [blogImage, setBlogImage] = useState(existingBlog?.blogImg);
     const [blogTitle, setBlogTitle] = useState(existingBlog?.title);
     const [blogCategory, setBlogCategory] = useState(existingBlog?.category);
@@ -50,6 +50,7 @@ const EditBlogModal = ({ show, onHide, existingBlog }) => {
                 showToast('error', res?.data?.message);
                 return;
             }
+            setIsBlogUpdated(true);
             showToast('success', res?.data?.message);
             onHide(false);
         }).catch((err) => {

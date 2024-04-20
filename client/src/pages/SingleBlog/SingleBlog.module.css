@@ -104,9 +104,115 @@
     color: #818589;
     font-size: 17px;
     letter-spacing: 0.5px;
+    margin-bottom: 0px;
 }
 
 .blogStory::first-letter {
     font-size: 32px;
     font-weight: bolder;
+}
+
+.blogCommentsContainer {
+    margin-top: 62px;
+}
+
+.signedInUserContainer {
+    display: flex;
+    align-items: center;
+}
+
+.signedInUserContainer> :nth-child(1) {
+    margin-bottom: 0px;
+    margin-right: 8px;
+}
+
+.signedInUserContainer> :nth-child(3) {
+    color: var(--secondary-color);
+    cursor: pointer;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.signedInUserImage {
+    width: 32px;
+    height: 32px;
+}
+
+.addCommentContainer {
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    padding: 5px 15px 15px;
+    margin: 24px 0px;
+}
+
+.commentTextArea {
+    outline: 1px solid #ccc !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 4px;
+    font-size: 15px;
+    background-color: #f5f5f5;
+}
+
+.charRemAndSubmitBtnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.charRemAndSubmitBtnContainer>p {
+    margin-bottom: 0px;
+    color: #818589;
+    font-size: 14px;
+}
+
+.submitCommentBtn {
+    width: 90px;
+}
+
+.commentsCount {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0px 30px;
+}
+
+.commentsCount>p {
+    margin-bottom: 0px;
+}
+
+.commentsCount> :nth-child(2) {
+    padding: 4px 10px;
+    border: 1px solid #818589;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.singleComment {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.commenterName {
+    color: var(--secondary-color);
+    cursor: pointer;
+    margin-bottom: 0px;
+}
+
+.commentingTime {
+    margin-bottom: 0px;
+    color: #818589;
+    font-size: 15px;
+}
+
+.commentText {
+    color: #4f4e4e;
 }

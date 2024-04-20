@@ -12,14 +12,20 @@ import EditBlogModal from '../../modals/EditBlogModal';
 import showToast from '../../utils/Toast';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
+import Avatar from '../../components/Avatar';
+import TextArea from '../../components/TextArea';
 
 const SingleBlog = () => {
     const { blogId } = useParams();
     const [blog, setBlog] = useState({});
     const [deleteBlogModal, setDeleteBlogModal] = useState(false);
     const [editBlogModal, setEditBlogModal] = useState(false);
+    const [isBlogUpdated, setIsBlogUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [comment, setComment] = useState("");
+    const [characterCount, setCharacterCount] = useState(200);
 
+    const maxCharCount = 200;
     const user = useSelector((state) => state?.user);
 
     useEffect(() => {
@@ -29,7 +35,7 @@ const SingleBlog = () => {
         }).catch((err) => {
             showToast('error', err?.message);
         }).finally(() => setLoading(false));
-    }, [editBlogModal]);
+    }, [isBlogUpdated]);
 
     return (
         <>
@@ -67,6 +73,48 @@ const SingleBlog = () => {
                                         </div>
                                     </div>
                                 </Col>
+                                <Col lg={12}>
+                                    <div className={styles.blogCommentsContainer}>
+                                        <div className={styles.signedInUserContainer}>
+                                            <p>Signed in as:</p>
+                                            <Avatar img={user?.profileImg} className={styles.signedInUserImage} />
+                                            <p className={styles.signedInUsername}>@{user?.username}</p>
+                                        </div>
+
+                                        <div className={styles.addCommentContainer}>
+                                            <TextArea value={comment} setter={setComment} placeholder={'Add A Comment...'} className={styles.commentTextArea} maxCharCount={maxCharCount} setCharacterCount={setCharacterCount} />
+                                            <div className={styles.charRemAndSubmitBtnContainer}>
+                                                <p>{characterCount} characters remaining</p>
+                                                <Button btnText={'Submit'} className={styles.submitCommentBtn} disabled={!comment} />
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.allCommentsMainContainer}>
+                                            <div className={styles.commentsCount}>
+                                                <p>Comments</p>
+                                                <p>2</p>
+                                            </div>
+
+                                            <div className={styles.commentsContainer}>
+                                                <div className={styles.singleComment}>
+                                                    <div className={styles.imageOfCommenter}>
+                                                        <Avatar img={user?.profileImg} />
+                                                    </div>
+                                                    <div className={styles.commentContent}>
+                                                        <div className={styles.commentHeader}>
+                                                            <p className={styles.commenterName}>@Moazzam</p>
+                                                            <p className={styles.commentingTime}>1 month ago</p>
+                                                        </div>
+                                                        <p className={styles.commentText}>
+                                                            Congratulations! You've successfully set up Tailwind CSS with Vite, providing a blazing fast and efficient way to develop web applications. Now, you can start crafting beautiful user interfaces.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Col>
                             </Row>
                         </Container>
                     </section>
@@ -74,7 +122,7 @@ const SingleBlog = () => {
                 </>
             }
 
-            {editBlogModal && <EditBlogModal show={editBlogModal} onHide={setEditBlogModal} existingBlog={blog} />}
+            {editBlogModal && <EditBlogModal show={editBlogModal} onHide={setEditBlogModal} existingBlog={blog} setIsBlogUpdated={setIsBlogUpdated} />}
             {deleteBlogModal && <DeleteBlogModal show={deleteBlogModal} onHide={setDeleteBlogModal} authorId={blog?.authorId} blogId={blogId} />}
         </>
     )
