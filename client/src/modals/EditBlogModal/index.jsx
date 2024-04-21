@@ -52,10 +52,12 @@ const EditBlogModal = ({ show, onHide, existingBlog, setIsBlogUpdated }) => {
             }
             setIsBlogUpdated(true);
             showToast('success', res?.data?.message);
-            onHide(false);
         }).catch((err) => {
             showToast('error', err?.message);
-        }).finally(() => setLoading(false));
+        }).finally(() => {
+            onHide(false);
+            setLoading(false);
+        });
     }
 
     return (

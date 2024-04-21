@@ -1,4 +1,5 @@
 const Blog = require('../models/Blog');
+const Comment = require('../models/Comment');
 
 exports.createBlog = async (req, res) => {
     try {
@@ -27,11 +28,12 @@ exports.getAllBlogs = async (req, res) => {
     }
 }
 
-exports.getSingleBlog = async (req, res) => {
+exports.getSingleBlogWithComments = async (req, res) => {
     try {
         const { blogId } = req.params;
         const blog = await Blog.findOne({ _id: blogId });
-        return res.send({ status: 'success', data: blog });
+        const allComments = await Comment.find({ blogId });
+        return res.send({ status: 'success', data: { blog, allComments } });
     } catch (error) {
         return res.status(505).send({ status: 'error', message: error.message });
     }

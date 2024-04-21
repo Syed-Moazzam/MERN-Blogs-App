@@ -6,18 +6,17 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
-    commenterImg: {
+    commenterId: {
         type: String,
         required: true,
+    },
+    commenterImg: {
+        type: String,
+        default: "",
     },
     commenterName: {
         type: String,
         required: true,
-    },
-    commentingTime: {
-        type: Date,
-        required: true,
-        default: Date.now
     },
     commentText: {
         type: String,

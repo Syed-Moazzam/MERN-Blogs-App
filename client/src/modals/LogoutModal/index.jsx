@@ -15,7 +15,7 @@ const LogoutModal = ({ show, onHide }) => {
     const handleLogout = () => {
         onHide(false);
         logoutApi().then((res) => {
-            if (res?.data?.status !== 'success' && res?.data?.message !== 'Unauthorized User! Please Login Again') {
+            if (res?.data?.status !== 'success' && res?.data?.message !== 'The User Is Unauthorized Or The Session Is Inactive! Please Login Again') {
                 showToast('error', res?.data?.message);
                 return;
             }

@@ -31,7 +31,7 @@ export const getAllBlogs = async () => {
     return axios.get(`/api/get-all-blogs`);
 }
 
-export const getSingleBlog = async (blogId) => {
+export const getSingleBlogWithComments = async (blogId) => {
     return axios.get(`/api/get-single-blog/${blogId}`);
 }
 
@@ -53,12 +53,12 @@ export const deleteBlog = async (authorId, blogId) => {
 }
 
 // comment api(s)
-export const getSingleBlogComments = async (blogId) => {
-    return axios.get(`/api/get-single-blog-comments/${blogId}`);
-}
-
 export const createComment = async (reqBody) => {
     return axios.post(`/api/create-comment`, reqBody);
+}
+
+export const deleteComment = async (commentId) => {
+    return axios.delete(`/api/delete-comment/${commentId}`);
 }
 
 // api for uploading images to cloudinary

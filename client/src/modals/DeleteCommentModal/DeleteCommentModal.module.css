@@ -1,0 +1,13 @@
+.cancelBtnOfDeleteCommentModal {
+    width: 90px;
+    background-color: #b4bbc2;
+}
+
+.cancelBtnOfDeleteCommentModal:hover {
+    background-color: #999fa5;
+    border-color: #999fa5;
+}
+
+.deleteBtnOfDeleteCommentModal {
+    width: 90px;
+}

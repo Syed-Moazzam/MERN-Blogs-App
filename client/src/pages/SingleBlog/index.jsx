@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styles from './SingleBlog.module.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { getSingleBlog } from '../../api';
+import { getSingleBlogWithComments, createComment } from '../../api';
 import Button from '../../components/Button';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import DeleteBlogModal from '../../modals/DeleteBlogModal';
@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 import Avatar from '../../components/Avatar';
 import TextArea from '../../components/TextArea';
+import BlogComment from '../../components/BlogComment';
 
 const SingleBlog = () => {
     const { blogId } = useParams();
@@ -22,20 +23,46 @@ const SingleBlog = () => {
     const [editBlogModal, setEditBlogModal] = useState(false);
     const [isBlogUpdated, setIsBlogUpdated] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [commentLoading, setCommentLoading] = useState(false);
     const [comment, setComment] = useState("");
     const [characterCount, setCharacterCount] = useState(200);
+    const [allComments, setAllComments] = useState([]);
 
     const maxCharCount = 200;
     const user = useSelector((state) => state?.user);
 
     useEffect(() => {
         setLoading(true);
-        getSingleBlog(blogId).then((res) => {
-            setBlog(res?.data?.data);
+        getSingleBlogWithComments(blogId).then((res) => {
+            setBlog(res?.data?.data?.blog);
+            setAllComments(res?.data?.data?.allComments);
         }).catch((err) => {
             showToast('error', err?.message);
         }).finally(() => setLoading(false));
     }, [isBlogUpdated]);
+
+    const submitComment = () => {
+        const reqBody = {
+            blogId,
+            commenterId: user?._id,
+            commenterImg: user?.profileImg,
+            commenterName: user?.username,
+            commentText: comment
+        };
+
+        setCommentLoading(true);
+        createComment(reqBody).then((res) => {
+            setComment("");
+            setCharacterCount(200);
+            if (res?.data?.status !== 'success') {
+                showToast('error', res?.data?.message);
+                return;
+            }
+            setAllComments([...allComments, res?.data?.data]);
+        }).catch((err) => {
+            showToast('error', err?.message);
+        }).finally(() => setCommentLoading(false));
+    }
 
     return (
         <>
@@ -75,44 +102,41 @@ const SingleBlog = () => {
                                 </Col>
                                 <Col lg={12}>
                                     <div className={styles.blogCommentsContainer}>
-                                        <div className={styles.signedInUserContainer}>
-                                            <p>Signed in as:</p>
-                                            <Avatar img={user?.profileImg} className={styles.signedInUserImage} />
-                                            <p className={styles.signedInUsername}>@{user?.username}</p>
-                                        </div>
+                                        {user &&
+                                            <>
+                                                <div className={styles.signedInUserContainer}>
+                                                    <p>Signed in as:</p>
+                                                    <Avatar img={user?.profileImg} className={styles.signedInUserImage} />
+                                                    <p className={styles.signedInUsername}>@{user?.username}</p>
+                                                </div>
 
-                                        <div className={styles.addCommentContainer}>
-                                            <TextArea value={comment} setter={setComment} placeholder={'Add A Comment...'} className={styles.commentTextArea} maxCharCount={maxCharCount} setCharacterCount={setCharacterCount} />
-                                            <div className={styles.charRemAndSubmitBtnContainer}>
-                                                <p>{characterCount} characters remaining</p>
-                                                <Button btnText={'Submit'} className={styles.submitCommentBtn} disabled={!comment} />
-                                            </div>
-                                        </div>
+                                                <div className={styles.addCommentContainer}>
+                                                    <TextArea value={comment} setter={setComment} placeholder={'Add A Comment...'} className={styles.commentTextArea} maxCharCount={maxCharCount} setCharacterCount={setCharacterCount} />
+                                                    <div className={styles.charRemAndSubmitBtnContainer}>
+                                                        <p>{characterCount} characters remaining</p>
+                                                        <Button btnText={'Submit'} className={styles.submitCommentBtn} disabled={!comment} onClick={submitComment} loading={commentLoading} />
+                                                    </div>
+                                                </div>
+                                            </>
+                                        }
 
-                                        <div className={styles.allCommentsMainContainer}>
+                                        {allComments && allComments?.length > 0 && <div className={styles.allCommentsMainContainer}>
                                             <div className={styles.commentsCount}>
                                                 <p>Comments</p>
-                                                <p>2</p>
+                                                <p>{allComments?.length}</p>
                                             </div>
 
                                             <div className={styles.commentsContainer}>
-                                                <div className={styles.singleComment}>
-                                                    <div className={styles.imageOfCommenter}>
-                                                        <Avatar img={user?.profileImg} />
-                                                    </div>
-                                                    <div className={styles.commentContent}>
-                                                        <div className={styles.commentHeader}>
-                                                            <p className={styles.commenterName}>@Moazzam</p>
-                                                            <p className={styles.commentingTime}>1 month ago</p>
-                                                        </div>
-                                                        <p className={styles.commentText}>
-                                                            Congratulations! You've successfully set up Tailwind CSS with Vite, providing a blazing fast and efficient way to develop web applications. Now, you can start crafting beautiful user interfaces.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr />
+                                                {allComments?.map((comment, index) => {
+                                                    return (
+                                                        <Fragment key={index}>
+                                                            <BlogComment commenterId={comment?.commenterId} commentId={comment?._id} commenterImg={comment?.commenterImg} commenterName={comment?.commenterName} commentingDateAndTime={comment?.createdAt} commentText={comment?.commentText} allComments={allComments} setAllComments={setAllComments} />
+                                                            <hr />
+                                                        </Fragment>
+                                                    )
+                                                })}
                                             </div>
-                                        </div>
+                                        </div>}
                                     </div>
                                 </Col>
                             </Row>
