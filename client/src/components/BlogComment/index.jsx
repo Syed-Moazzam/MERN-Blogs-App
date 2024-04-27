@@ -75,7 +75,7 @@ const BlogComment = ({ commenterId, commentId, commenterImg, commenterName, comm
                             </>
                             :
                             <>
-                                <Button btnText={'Edit'} onClick={toggleEditableCommentState} />
+                                <Button btnText={'Edit'} onClick={() => toggleEditableCommentState('Edit')} />
                                 <Button btnText={'Delete'} onClick={() => setDeleteCommentModal(true)} />
                             </>
                         }
