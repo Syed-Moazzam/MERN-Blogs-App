@@ -8,7 +8,7 @@ const SearchBar = ({ value, setter, type, placeholder, searchBtnText, className 
     return (
         <div className={[className && className, styles.searchbarContainer].join(' ')}>
             <IoSearchSharp className={styles.searchIcon} />
-            <Input value={value} setter={setter} type={type} placeholder={placeholder} className={styles.searchbarInput} callFrom={'SearchBar'} />
+            <Input value={value} setter={setter} type={type} placeholder={placeholder} className={styles.searchbarInput} containerCustomStyle={{ borderBottom: 'none' }} />
             <Button btnText={searchBtnText} className={styles.searchbarButton} />
         </div>
     )

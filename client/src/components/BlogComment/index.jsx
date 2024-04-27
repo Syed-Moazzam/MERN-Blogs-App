@@ -4,9 +4,14 @@ import Avatar from '../Avatar';
 import Button from '../Button';
 import DeleteCommentModal from '../../modals/DeleteCommentModal';
 import { useSelector } from 'react-redux';
+import Input from '../Input';
+import { updateComment } from '../../api';
+import showToast from '../../utils/Toast';
 
 const BlogComment = ({ commenterId, commentId, commenterImg, commenterName, commentingDateAndTime, commentText, allComments, setAllComments }) => {
     const [deleteCommentModal, setDeleteCommentModal] = useState(false);
+    const [isCommentEditable, setIsCommentEditable] = useState(false);
+    const [updatedComment, setUpdatedComment] = useState(commentText);
     const user = useSelector((state) => state?.user);
 
     const findCommentTime = () => {
@@ -32,6 +37,24 @@ const BlogComment = ({ commenterId, commentId, commenterImg, commenterName, comm
         }
     }
 
+    const toggleEditableCommentState = (btnLabel) => {
+        setIsCommentEditable(!isCommentEditable);
+        if (btnLabel === 'Cancel') {
+            setUpdatedComment(commentText);
+        }
+    }
+
+    const handleUpdateComment = () => {
+        updateComment(commentId, { commentText: updatedComment }).then((res) => {
+            if (res?.data?.status !== 'success') {
+                showToast('error', 'Comment Could Not Be Updated Successfully!');
+                return;
+            }
+        }).catch((err) => {
+            showToast('error', err?.message);
+        }).finally(() => setIsCommentEditable(false));
+    }
+
     return (
         <>
             <div className={[styles.singleComment, user?._id !== commenterId && styles.singleCommentWithoutEditAndDelete].join(' ')}>
@@ -43,11 +66,21 @@ const BlogComment = ({ commenterId, commentId, commenterImg, commenterName, comm
                         <p className={styles.commenterName}>@{commenterName}</p>
                         <p className={styles.commentingDateAndTime}>{findCommentTime()}</p>
                     </div>
-                    <p className={styles.commentText}>{commentText}</p>
-                    {user && user?._id === commenterId && <div className={styles.editAndDeleteCommentBtnsContainer}>
-                        <Button btnText={'Edit'} />
-                        <Button btnText={'Delete'} onClick={() => setDeleteCommentModal(true)} />
-                    </div>}
+                    {isCommentEditable ? <Input value={updatedComment} setter={setUpdatedComment} type={'text'} placeholder={'Add Comment...'} className={styles.inputComponentForUpdatedComment} containerCustomStyle={{ borderBottom: 'none', margin: '0px' }} /> : <p className={styles.commentText}>{updatedComment}</p>}
+                    {user && user?._id === commenterId && <div className={styles.commentBtnsContainer}>
+                        {isCommentEditable ?
+                            <>
+                                <Button btnText={'Cancel'} onClick={() => toggleEditableCommentState('Cancel')} />
+                                {updatedComment && <Button btnText={'Submit'} onClick={handleUpdateComment} />}
+                            </>
+                            :
+                            <>
+                                <Button btnText={'Edit'} onClick={toggleEditableCommentState} />
+                                <Button btnText={'Delete'} onClick={() => setDeleteCommentModal(true)} />
+                            </>
+                        }
+                    </div>
+                    }
                 </div>
             </div>
 

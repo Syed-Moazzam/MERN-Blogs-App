@@ -9,11 +9,15 @@
     margin-bottom: 25px;
 }
 
+.commentContent {
+    width: 100%;
+}
+
 .commentHeader {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .commenterName {
@@ -33,14 +37,19 @@
     color: #4f4e4e;
 }
 
-.editAndDeleteCommentBtnsContainer {
+.inputComponentForUpdatedComment {
+    padding: 0px;
+    font-size: 15.6px;
+}
+
+.commentBtnsContainer {
     display: flex;
     align-items: center;
     gap: 14px;
     margin-top: 4px;
 }
 
-.editAndDeleteCommentBtnsContainer button {
+.commentBtnsContainer button {
     background-color: transparent;
     font-size: 15px;
     color: #818589;
@@ -49,6 +58,6 @@
     outline: none;
 }
 
-.editAndDeleteCommentBtnsContainer button:hover {
+.commentBtnsContainer button:hover {
     background-color: transparent;
 }

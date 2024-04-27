@@ -57,6 +57,10 @@ export const createComment = async (reqBody) => {
     return axios.post(`/api/create-comment`, reqBody);
 }
 
+export const updateComment = async (commentId, reqBody) => {
+    return axios.put(`/api/update-comment/${commentId}`, reqBody);
+}
+
 export const deleteComment = async (commentId) => {
     return axios.delete(`/api/delete-comment/${commentId}`);
 }

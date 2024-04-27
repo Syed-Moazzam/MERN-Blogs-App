@@ -15,6 +15,16 @@ exports.createComment = async (req, res) => {
     }
 }
 
+exports.updateComment = async (req, res) => {
+    try {
+        const { commentId } = req.params;
+        const isUpdated = await Comment.findByIdAndUpdate({ _id: commentId }, { $set: req.body }, { new: true });
+        if (isUpdated) return res.send({ status: 'success', message: 'Comment Updated Successfully!' });
+    } catch (error) {
+        return res.status(505).send({ status: 'error', message: error.message });
+    }
+}
+
 exports.deleteComment = async (req, res) => {
     try {
         const { commentId } = req.params;
