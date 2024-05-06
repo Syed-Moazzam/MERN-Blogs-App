@@ -9,9 +9,6 @@
     border: none;
     border-bottom: 1px solid #757171;
     padding: 8px 0px;
-    font-family: 'poppins-regular';
-    font-size: 16.5px;
-    color: var(--black-color);
     cursor: pointer;
 }
 
@@ -22,4 +19,8 @@
 
 .dropdownComponent:hover {
     border-bottom: 2px solid var(--black-color);
+}
+
+.dropdownDefaultOption {
+    color: var(--dropdown-default-option-color);
 }

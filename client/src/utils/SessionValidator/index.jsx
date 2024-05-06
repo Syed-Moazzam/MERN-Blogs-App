@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAuthenticatedUser } from "../../redux/user/userSlice";
+import { deleteAuthenticatedUser } from "../../redux/userSlice";
 
 const useSessionValidation = () => {
     const dispatch = useDispatch();

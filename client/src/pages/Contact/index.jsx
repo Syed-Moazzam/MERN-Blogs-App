@@ -47,14 +47,16 @@ const Contact = () => {
             <HeroSection img={allImages?.contactImg} />
             <section className={styles.contactFormSection}>
                 <Container>
-                    <Row>
-                        <Col lg={5}><img src={allImages?.contactImg2} alt="" className={styles.contactImg2} /></Col>
-                        <Col lg={7}>
+                    <Row className={styles.rowOfContactPageContent}>
+                        <Col md={6} lg={5}>
+                            <img src={allImages?.contactImg2} alt="" className={styles.contactImg2} />
+                        </Col>
+                        <Col md={6} lg={7}>
                             <div className={styles.contactForm}>
                                 <h2>Get In Touch!</h2>
                                 <Input value={username} setter={setUsername} placeholder={'Enter Your Name...'} type={'text'} disabled={loading} />
                                 <Input value={email} setter={setEmail} placeholder={'Enter Your Email...'} type={'email'} disabled={loading} />
-                                <TextArea value={message} setter={setMessage} placeholder={'Enter Your Message...'} disabled={loading} />
+                                <TextArea value={message} setter={setMessage} placeholder={'Enter Your Message...'} className={styles.textAreaOfContactPage} disabled={loading} />
                                 <Button btnText={'Submit'} loading={loading} className={styles.contactFormBtn} onClick={handleEmailSubmit} />
                             </div>
                         </Col>

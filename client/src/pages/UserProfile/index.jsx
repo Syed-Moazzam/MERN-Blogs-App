@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
 import showToast from '../../utils/Toast';
 import { updateUser, uploadImageToCloudinary } from '../../api';
-import { updateAuthenticatedUser } from '../../redux/user/userSlice';
+import { updateAuthenticatedUser } from '../../redux/userSlice';
 import DeleteProfileModal from '../../modals/DeleteProfileModal';
 
 const UserProfile = () => {

@@ -18,7 +18,12 @@
 }
 
 
+/* media queries */
 @media screen and (max-width: 992px) {
+    .createBlogContainer {
+        margin: 90px auto 95px;
+    }
+
     .rowOfCreateBlogPage {
         gap: 34px;
     }

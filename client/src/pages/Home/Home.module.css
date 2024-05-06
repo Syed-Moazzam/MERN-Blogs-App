@@ -1,4 +1,4 @@
-.blogsCategoryContainer {
+.homeMainContainer {
     margin: 50px auto 100px;
 }
 
@@ -39,9 +39,21 @@
     font-size: 15.5px;
 }
 
+.blogCardContainerOfHome {
+    margin-bottom: 20px;
+}
+
 .noBlogsFoundElement {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+/* media queries */
+@media screen and (max-width: 768px) {
+    .rowOfHomeContent {
+        gap: 40px;
+    }
 }

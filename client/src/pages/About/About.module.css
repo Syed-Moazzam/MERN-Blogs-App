@@ -22,3 +22,42 @@
     font-size: 17px;
     margin-right: 10px;
 }
+
+
+/* media queries */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .aboutPageDescriptionImg {
+        height: 320px;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .aboutDescriptionContainer {
+        margin-bottom: 100px;
+    }
+
+    .descriptionHeadingOfAbout {
+        text-align: center;
+        font-size: 32px;
+    }
+
+    .descriptionOfAbout {
+        font-size: 16px;
+    }
+
+    .aboutPageDescriptionImg {
+        height: 250px;
+        object-fit: inherit;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .descriptionOfAbout {
+        font-size: 15px;
+    }
+
+    .aboutPageDescriptionImg {
+        height: 305px;
+    }
+}

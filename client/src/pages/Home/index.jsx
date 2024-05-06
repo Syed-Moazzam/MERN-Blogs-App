@@ -48,9 +48,9 @@ const Home = () => {
                 <>
                     <Header />
                     <HeroSection img={allImages?.mainBgImg} />
-                    <Container fluid className={styles.blogsCategoryContainer}>
-                        <Row>
-                            <Col lg={2}>
+                    <Container fluid className={styles.homeMainContainer}>
+                        <Row className={styles.rowOfHomeContent}>
+                            <Col md={4} lg={3} xxl={2}>
                                 <Link to={'/create-blog'} className={styles.createBlogLinkOfHome}>CREATE BLOG</Link>
                                 <div className={styles.categoriesMainContainer}>
                                     {categories?.map((category, key) => {
@@ -63,12 +63,14 @@ const Home = () => {
                                 </div>
                             </Col>
 
-                            <Col lg={10}>
+                            <Col md={8} lg={9} xxl={10}>
                                 {filteredBlogs?.length || blogs?.length ? <Row>
                                     {(filteredBlogs?.length ? filteredBlogs : blogs)?.map((blog, index) => {
                                         return (
-                                            <Col lg={3} key={index}>
-                                                <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorName={blog?.authorName} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
+                                            <Col sm={6} md={6} lg={4} xxl={3} key={index}>
+                                                <div className={styles.blogCardContainerOfHome}>
+                                                    <BlogCard image={blog?.blogImg} categoryName={blog?.category} blogTitle={blog?.title} authorName={blog?.authorName} blogDescription={blog?.story} onClick={() => navigate(`/blog/${blog?._id}`)} />
+                                                </div>
                                             </Col>
                                         )
                                     })}

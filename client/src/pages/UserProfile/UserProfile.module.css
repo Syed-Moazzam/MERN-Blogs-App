@@ -13,8 +13,8 @@
 }
 
 .uploadImgComponentForUserProfile {
-    width: 250px !important;
-    height: 250px !important;
+    width: 250px;
+    height: 250px;
 }
 
 .uploadImgComponentForUserProfile>span {
@@ -32,14 +32,16 @@
 }
 
 .updateUserProfileBtn {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
     color: var(--white-color) !important;
     background-color: var(--green-color) !important;
-    width: 172px;
+    padding: 8px 16px;
 }
 
 .updateUserProfileBtn svg {
     color: var(--white-color) !important;
-    margin-right: 5px;
 }
 
 .updateUserProfileBtn:hover {
@@ -54,17 +56,68 @@
 }
 
 .deleteUserProfileBtn {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
     color: var(--white-color) !important;
     background-color: var(--red-color) !important;
-    width: 172px;
+    padding: 8px 16px;
 }
 
 .deleteUserProfileBtn svg {
     color: var(--white-color) !important;
-    margin-right: 5px;
 }
 
 .deleteUserProfileBtn:hover {
     border-color: var(--red-hover-color) !important;
     background-color: var(--red-hover-color) !important;
+}
+
+
+/* media queries */
+@media screen and (max-width: 1200px) {
+    .rowOfUserProfileSection {
+        width: 60% !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .rowOfUserProfileSection {
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .rowOfUserProfileSection {
+        width: 95% !important;
+        margin: 110px auto 95px !important;
+    }
+
+    .updateUserProfileBtn svg,
+    .deleteUserProfileBtn svg {
+        font-size: 20px;
+    }
+
+    .updateUserProfileBtn span,
+    .deleteUserProfileBtn span {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .updateUserProfileBtn,
+    .deleteUserProfileBtn {
+        padding: 8px 12px;
+    }
+
+    .updateUserProfileBtn svg,
+    .deleteUserProfileBtn svg {
+        font-size: 20px;
+    }
+
+    .updateUserProfileBtn span,
+    .deleteUserProfileBtn span {
+        font-size: 14.5px;
+    }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BlogCard.module.css';
 import Card from 'react-bootstrap/Card';
 
-const BlogCard = ({ image, categoryName, blogTitle, authorName, blogDescription, onClick }) => {
+const BlogCard = ({ image, categoryName, blogTitle, authorName, blogDescription, inlineStyles, onClick }) => {
     let description = "";
     if (blogDescription?.length > 50) {
         description = blogDescription?.slice(0, 51) + '...';
@@ -10,7 +10,7 @@ const BlogCard = ({ image, categoryName, blogTitle, authorName, blogDescription,
     else description = blogDescription;
 
     return (
-        <Card className={styles.blogCardContainer} onClick={onClick}>
+        <Card className={styles.blogCardContainer} style={{ ...inlineStyles }} onClick={onClick}>
             <Card.Img variant="top" src={image} className={styles.blogCardImg} />
             <hr />
             <Card.Body>

@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import { logoutApi } from '../../api';
 import showToast from '../../utils/Toast';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../redux/user/userSlice';
+import { logout } from '../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import styles from './LogoutModal.module.css';
 

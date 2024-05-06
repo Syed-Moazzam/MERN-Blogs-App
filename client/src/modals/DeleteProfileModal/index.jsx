@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 import { deleteUser } from '../../api';
 import showToast from '../../utils/Toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAuthenticatedUser } from '../../redux/user/userSlice';
+import { deleteAuthenticatedUser } from '../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
 import styles from './DeleteProfileModal.module.css';
 

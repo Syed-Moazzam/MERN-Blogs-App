@@ -1,3 +1,7 @@
+.contactFormSection {
+    margin: 80px auto 65px;
+}
+
 .contactImg2 {
     width: 90%;
     height: 90%;
@@ -7,13 +11,13 @@
     mix-blend-mode: multiply;
 }
 
-.contactFormSection {
-    margin: 80px auto 60px;
-}
-
 .contactForm h2 {
     letter-spacing: 1px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
+}
+
+.rowOfContactPageContent {
+    align-items: center;
 }
 
 .contactFormBtn {
@@ -25,4 +29,36 @@
 
 .contactFormBtn:hover {
     background-color: var(--secondary-hover-color);
+}
+
+
+/* media queries */
+@media screen and (max-width: 992px) {
+    .contactFormSection {
+        margin: 65px auto 75px;
+    }
+
+    .contactImg2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .textAreaOfContactPage {
+        height: 165px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .rowOfContactPageContent {
+        gap: 28px;
+    }
+
+    .contactForm h2 {
+        text-align: center;
+    }
+
+    .contactImg2 {
+        width: 88%;
+        height: 88%;
+    }
 }

@@ -3,10 +3,9 @@ import aboutImg from '../assets/images/about.jpg';
 import aboutImg2 from '../assets/images/about-img-2.jpg';
 import aboutImg3 from '../assets/images/about-img-3.jpg';
 import contactImg from '../assets/images/contact.jpg';
-import contactImg2 from '../assets/images/contact-img-2.avif';
+import contactImg2 from '../assets/images/contact-img-2.png';
 import mainBgImg from '../assets/images/main-bg-img.jpg';
 import createBlogImg from '../assets/images/create-blog-img.jpg';
-import defaultBlogImg from '../assets/images/default-blog-img.png';
 import defaultUserAvatar from '../assets/images/default-user-avatar.png';
 
 const allImages = {
@@ -18,7 +17,6 @@ const allImages = {
     contactImg2,
     mainBgImg,
     createBlogImg,
-    defaultBlogImg,
     defaultUserAvatar
 };
 

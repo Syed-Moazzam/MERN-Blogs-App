@@ -13,7 +13,7 @@ const Footer = ({ className }) => {
                 <Row>
                     <div className={styles.footerContentContainer}>
                         <Col sm={12} md={12} lg={7}>
-                            <h3>StoryStreamline</h3>
+                            <h3 className={styles.footerHeading}>StoryStreamline</h3>
                         </Col>
                         <Col sm={12} md={12} lg={5}>
                             <Row className={styles.nestedRowOfFooter}>

@@ -20,6 +20,7 @@
     --red-color: #dc3545;
     --red-hover-color: #bb2d3b;
     --light-blue-color: rgba(25, 118, 210, 0.04);
+    --dropdown-default-option-color: #757575;
 }
 
 @font-face {
@@ -88,6 +89,12 @@ body input {
 body textarea {
     font-family: 'poppins-regular';
     font-size: 17px;
+    color: var(--black-color);
+}
+
+body select {
+    font-family: 'poppins-regular';
+    font-size: 16.5px;
     color: var(--black-color);
 }
 
@@ -161,5 +168,17 @@ body svg:hover {
 @media screen and (min-width: 992px) {
     .modal-dialog {
         max-width: 600px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    body input,
+    body textarea {
+        font-size: 16px;
+    }
+
+    body select {
+        font-size: 16.2px;
     }
 }

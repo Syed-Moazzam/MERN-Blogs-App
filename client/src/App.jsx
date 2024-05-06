@@ -37,7 +37,7 @@ function App() {
         } />
         <Route path='/contact' element={
           <Suspense fallback={<Loader customStyles={loaderStyle} />}>
-            <ProtectedRoute path={'/contact'} component={Contact} />
+            <Contact />
           </Suspense>
         } />
         <Route path='/create-blog' element={

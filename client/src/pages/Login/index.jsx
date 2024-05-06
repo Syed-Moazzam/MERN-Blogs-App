@@ -10,7 +10,7 @@ import { loginApi } from '../../api';
 import showToast from '../../utils/Toast';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/user/userSlice';
+import { login } from '../../redux/userSlice';
 
 const Login = () => {
     const [email, setEmail] = useState('');
