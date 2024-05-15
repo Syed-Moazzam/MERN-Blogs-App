@@ -92,7 +92,7 @@ const CreateBlog = () => {
                         </Col>
                         <Col lg={8}>
                             <Input value={blogTitle} setter={setBlogTitle} placeholder={'Title...'} type={'text'} disabled={loading} />
-                            <DropDown options={options} value={blogCategory} setter={setBlogCategory} disabled={loading} />
+                            <DropDown options={options} value={blogCategory} setter={setBlogCategory} defaultValue={'Category...'} clickableOptions={false} disabled={loading} />
                             <TextArea value={blogStory} setter={setBlogStory} placeholder={'Tell Your Story...'} disabled={loading} />
                             <Button btnText={'PUBLISH'} loading={loading} className={styles.publishBtnOfCreateBlogPage} onClick={handleBlogCreation} />
                         </Col>

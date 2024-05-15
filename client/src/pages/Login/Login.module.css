@@ -27,9 +27,13 @@
     margin: 20px 0px;
 }
 
+.containerDivOfLoginBtn {
+    width: 100%;
+}
+
 .loginBtn {
     background-color: var(--primary-color) !important;
-    width: 330px !important;
+    width: 100%;
     margin-top: 14px;
     border: none;
     outline: none;
@@ -79,4 +83,19 @@
 .goToHomeLink:hover {
     color: var(--white-color);
     background-color: var(--secondary-hover-color);
+}
+
+
+/* media queries */
+@media screen and (max-width: 576px) {
+    .loginBoxContainer {
+        width: 72%;
+        padding: 50px 30px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .loginBoxContainer {
+        width: 85%;
+    }
 }

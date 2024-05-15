@@ -71,7 +71,7 @@ const EditBlogModal = ({ show, onHide, existingBlog, setIsBlogUpdated }) => {
                         <UploadImage value={blogImage} setter={setBlogImage} previewImg={previewImg} setPreviewImg={setPreviewImg} className={styles.uploadImgClass} imgStyles={{ width: '250px', height: '250px' }} />
                     </div>
                     <Input value={blogTitle} setter={setBlogTitle} type={'text'} placeholder={'Title...'} />
-                    <DropDown value={blogCategory} setter={setBlogCategory} options={options} />
+                    <DropDown value={blogCategory} setter={setBlogCategory} defaultValue={'Category...'} options={options} clickableOptions={false} />
                     <TextArea value={blogStory} setter={setBlogStory} placeholder={'Tell Your Story...'} />
                 </div>
             </Modal.Body>

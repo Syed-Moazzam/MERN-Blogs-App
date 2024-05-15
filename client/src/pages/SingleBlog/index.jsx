@@ -15,6 +15,7 @@ import Loader from '../../components/Loader';
 import Avatar from '../../components/Avatar';
 import TextArea from '../../components/TextArea';
 import BlogComment from '../../components/BlogComment';
+import DropDown from '../../components/DropDown';
 
 const SingleBlog = () => {
     const { blogId } = useParams();
@@ -64,6 +65,11 @@ const SingleBlog = () => {
         }).finally(() => setCommentLoading(false));
     }
 
+    const options = [
+        { label: 'Edit', onClick: () => setEditBlogModal(true) },
+        { label: 'Delete', onClick: () => setDeleteBlogModal(true) }
+    ];
+
     return (
         <>
             {loading ? <Loader customStyles={{ width: '60px', height: '60px', borderWidth: '6px' }} /> :
@@ -85,6 +91,10 @@ const SingleBlog = () => {
                                             {user && user?._id === blog?.authorId && <div className={styles.editAndDeleteBtnContainer}>
                                                 <Button className={styles.editBlogBtn} onClick={() => setEditBlogModal(true)}><MdEdit /></Button>
                                                 <Button className={styles.deleteBlogBtn} onClick={() => setDeleteBlogModal(true)}><MdDelete /></Button>
+                                            </div>}
+
+                                            {user && user?._id === blog?.authorId && <div className={styles.editAndDeleteBtnDropdown}>
+                                                <DropDown options={options} className={styles.clickableDropdownOfSingleBlog} clickableOptions={true} />
                                             </div>}
                                         </div>
 

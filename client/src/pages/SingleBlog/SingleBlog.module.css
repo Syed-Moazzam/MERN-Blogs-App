@@ -47,6 +47,24 @@
     gap: 16px;
 }
 
+.editAndDeleteBtnDropdown {
+    display: none;
+}
+
+.clickableDropdownOfSingleBlog {
+    background-color: transparent !important;
+    outline: none !important;
+    border: none !important;
+    color: var(--black-color) !important;
+    padding: 0px !important;
+}
+
+.clickableDropdownOfSingleBlog::after {
+    border-top: .38em solid !important;
+    border-right: .38em solid transparent !important;
+    border-left: .38em solid transparent !important;
+}
+
 .editBlogBtn {
     background-color: transparent !important;
     border: none !important;
@@ -190,4 +208,34 @@
 
 .commentsContainer hr {
     margin: 0px;
+}
+
+
+/* media queries */
+@media screen and (max-width: 992px) {
+    .blogTitle {
+        width: 100%;
+    }
+
+    .blogTitle>h2 {
+        font-size: 32px;
+    }
+
+    .blogTitle>p {
+        font-size: 15px;
+    }
+
+    .editAndDeleteBtnDropdown {
+        display: block;
+    }
+
+    .editAndDeleteBtnContainer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .blogTitle {
+        margin-right: 30px;
+    }
 }

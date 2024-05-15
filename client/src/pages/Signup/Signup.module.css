@@ -27,11 +27,15 @@
     margin: 20px 0px;
 }
 
+.containerDivOfSignupBtn {
+    width: 100%;
+}
+
 .signupBtn {
     color: var(--secondary-color) !important;
     background-color: var(--white-color) !important;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-    width: 330px !important;
+    width: 100%;
     margin-top: 14px;
     border: none;
     outline: none;
@@ -84,4 +88,25 @@
 .goToHomeLink:hover {
     color: var(--white-color);
     background-color: var(--secondary-hover-color);
+}
+
+
+/* media queries */
+@media screen and (max-width: 768px) {
+    .signupBoxContainer {
+        width: 60%;
+        padding: 30px 30px 40px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .signupBoxContainer {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .signupBoxContainer {
+        width: 85%;
+    }
 }

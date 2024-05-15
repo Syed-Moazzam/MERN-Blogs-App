@@ -44,7 +44,9 @@ const Signup = () => {
                 <Input value={username} setter={setUsername} type={'text'} placeholder={'Enter Name...'} disabled={loading} />
                 <Input value={email} setter={setEmail} type={'email'} placeholder={'Enter Email Address...'} disabled={loading} />
                 <Input value={password} setter={setPassword} type={'password'} placeholder={'Enter Password...'} disabled={loading} />
-                <Button btnText={'Signup'} className={styles.signupBtn} loading={loading} onClick={handleSignup} />
+                <div className={styles.containerDivOfSignupBtn}>
+                    <Button btnText={'Signup'} className={styles.signupBtn} loading={loading} onClick={handleSignup} />
+                </div>
                 <p className={styles.orKeywordStyling}>OR</p>
                 <Link to='/login' className={styles.alreadyHaveAccountLink}>Already Have An Account?</Link>
                 <hr />
