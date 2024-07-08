@@ -35,7 +35,7 @@ cloudinary.config({
 });
 
 // express.static middleware for serving static files
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Accessing all available routes of the application
 readdirSync('./routes')?.map((route) => app.use('/api', require('./routes/' + route)));
