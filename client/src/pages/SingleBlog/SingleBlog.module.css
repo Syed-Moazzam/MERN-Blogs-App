@@ -235,7 +235,42 @@
 }
 
 @media screen and (max-width: 576px) {
-    .blogTitle {
+    .blogTitleForLoggedInUser {
         margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .singleBlogContainer {
+        margin-bottom: 90px;
+    }
+
+    .blogImageContainer {
+        height: 350px;
+    }
+
+    .blogTitle>h2 {
+        font-size: 30px;
+    }
+
+    .blogAuthorContainer {
+        font-size: 18px;
+    }
+
+    .blogStory {
+        font-size: 16px;
+    }
+
+    .commentTextArea {
+        font-size: 14.5px;
+    }
+
+    .charRemAndSubmitBtnContainer>p {
+        font-size: 12.5px;
+    }
+
+    .submitCommentBtn {
+        width: 85px;
+        padding: 6px 0px;
     }
 }

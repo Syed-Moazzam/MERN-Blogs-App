@@ -101,4 +101,12 @@
     .colOfFooterContent h6 {
         margin-bottom: 8px;
     }
+
+    .footerHeading {
+        font-size: 34px;
+    }
+
+    .copyrightContainer>p {
+        font-size: 15px;
+    }
 }

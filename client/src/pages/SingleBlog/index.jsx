@@ -84,7 +84,7 @@ const SingleBlog = () => {
                                 <Col lg={12}>
                                     <div className={styles.blogContentMainContainer}>
                                         <div className={styles.containerOfBlogTitleAndBtns}>
-                                            <div className={styles.blogTitle}>
+                                            <div className={[styles.blogTitle, user && styles.blogTitleForLoggedInUser].join(' ')}>
                                                 <h2>{blog?.title}</h2>
                                                 <p>{blog?.category}</p>
                                             </div>
