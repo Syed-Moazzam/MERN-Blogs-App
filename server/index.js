@@ -33,6 +33,9 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// express.static middleware for serving static files
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 // Accessing all available routes of the application
 readdirSync('./routes')?.map((route) => app.use('/api', require('./routes/' + route)));
 
