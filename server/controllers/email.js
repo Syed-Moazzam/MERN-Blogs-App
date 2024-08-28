@@ -11,7 +11,7 @@ exports.sendEmail = async (req, res) => {
             subject: 'Contacting Via Blogs Application',
             html: `<h2>${message}</h2>`
         });
-        return res.status(200).send({ status: 'success', message: 'Email Received Successfully! We Will Contact You Shortly.' });
+        return res.status(200).send({ status: 'success', message: 'Message Sent Successfully!' });
 
     } catch (error) {
         return res.status(505).send({ status: 'error', message: error.message });

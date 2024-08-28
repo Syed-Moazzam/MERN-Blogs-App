@@ -18,7 +18,7 @@ const Contact = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleEmailSubmit = () => {
+    const submitContactForm = () => {
         if (validator.isEmpty(username) || !validator.isEmail(email) || validator.isEmpty(message)) {
             showToast('error', 'Please Fill In All The Required Fields Correctly!');
         }
@@ -57,7 +57,7 @@ const Contact = () => {
                                 <Input value={username} setter={setUsername} placeholder={'Enter Your Name...'} type={'text'} disabled={loading} />
                                 <Input value={email} setter={setEmail} placeholder={'Enter Your Email...'} type={'email'} disabled={loading} />
                                 <TextArea value={message} setter={setMessage} placeholder={'Enter Your Message...'} className={styles.textAreaOfContactPage} disabled={loading} />
-                                <Button btnText={'Submit'} loading={loading} className={styles.contactFormBtn} onClick={handleEmailSubmit} />
+                                <Button btnText={'Send'} loading={loading} className={styles.contactFormBtn} onClick={submitContactForm} />
                             </div>
                         </Col>
                     </Row>
