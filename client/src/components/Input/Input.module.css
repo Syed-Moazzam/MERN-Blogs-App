@@ -20,6 +20,13 @@
     width: 100%;
     border: none;
     padding: 8px 0px;
+    background-color: transparent;
+    color: var(--black-color);
+}
+
+.inputComponent::placeholder {
+    color: var(--grey-color);
+    opacity: 1;
 }
 
 .eyeIconOfInput {
